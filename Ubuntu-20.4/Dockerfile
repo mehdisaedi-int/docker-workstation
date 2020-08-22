@@ -57,13 +57,15 @@ RUN curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-j
  && echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - \
 && dpkg -i nomachine.deb
 RUN groupadd -r nomachine -g 433 \
-&& useradd -u 431 -r -g nomachine -d /home/developer -s /bin/bash -c "Developer" developer \
-&& mkdir /home/developer \
-&& chown -R developer:nomachine /home/developer \
-&& echo 'developer:developer' | chpasswd
+&& useradd -u 1001 -r -g nomachine -d /home/developer -s /bin/bash -c "Developer" developer \
+&& echo 'developer:developer' | chpasswd \
+&& echo 'developer ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+&& adduser developer users
 
-RUN echo 'developer ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+ADD developer.tgz /home/
+RUN chown -R developer:users /home/developer
 
+ADD nomachine/etc.tgz /usr/NX/
+RUN chown -R nx:root /usr/NX/etc
 ADD nomachine/nxserver.sh /
-
 ENTRYPOINT ["/nxserver.sh"]
