@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[en_US]=mate-panel-launcher
+Exec=/opt/apps/pycharm-2019.2.3/bin/pycharm.sh
+Name[en_US]=Pyacharm Professional
+Comment[en_US]=Run Pyacharm Professional
+Name=Pyacharm Professional
+Comment=Run Pyacharm Professional
+Icon=/opt/apps/pycharm-community-2019.2.3/bin/pycharm.svg

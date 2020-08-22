@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[en_US]=mate-panel-launcher
+Exec=/opt/apps/pycharm-community-2019.2.3/bin/pycharm.sh
+Comment[en_US]=Run Pycharm-community
+Name[en_US]=Pycharm-community
+Name=Pycharm-community
+Comment=Run Pycharm-community
+Icon=/opt/apps/pycharm-community-2019.2.3/bin/pycharm.svg
