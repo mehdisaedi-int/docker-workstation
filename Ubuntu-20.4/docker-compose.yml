@@ -1,0 +1,16 @@
+version: '3'
+services:
+  desktop:
+    image: hossein20s/docker-workstation
+    container_name: desktop
+    privileged: true
+    environment:
+      DISPLAY: docker.for.mac.host.internal:0
+      USER: developer
+      PASSWORD: developer
+    cap_add:
+      - SYS_PTRACE
+    volumes:
+      - ${HOME}:/opt/host
+      - ${HOME}/.Xauthority:/home/developer/.Xauthority
+      - /dev/shm:/dev/shm
