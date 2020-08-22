@@ -4,6 +4,8 @@ services:
     image: hossein20s/docker-workstation
     container_name: desktop
     privileged: true
+    ports:
+      - 4000:4000
     environment:
       DISPLAY: docker.for.mac.host.internal:0
       USER: developer
@@ -12,5 +14,6 @@ services:
       - SYS_PTRACE
     volumes:
       - ${HOME}:/opt/host
-      - ${HOME}/.Xauthority:/home/developer/.Xauthority
+      - ${HOME}/docker-workstation/Ubuntu-20.4/developer:/home/developer
+      - ${HOME}/docker-workstation/Ubuntu-20.4/nomachine/NX/etc:/usr/NX/etc
       - /dev/shm:/dev/shm
