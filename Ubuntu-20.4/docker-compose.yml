@@ -1,6 +1,6 @@
 version: '3'
 services:
-  desktop:
+  workstation:
     image: hossein20s/docker-workstation:ubuntu-20.04-nomachine
     container_name: workstation
     privileged: true
