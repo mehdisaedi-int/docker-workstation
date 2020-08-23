@@ -38,4 +38,5 @@ RUN adduser developer sudo
 ENV DISPLAY :0
 
 USER developer
-ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "xterm"]
+# ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "xterm"]
+ENTRYPOINT ["/bin/sh", "-c", "tail -f /dev/null"]
