@@ -14,7 +14,7 @@ RUN apt install -y sudo
 
 RUN apt-get install -y nano htop vim xterm ssh openssh-server curl wget git
 RUN apt-get install -y openjdk-8-jdk default-jdk
-RUN apt-get install -y d
+
 
 RUN add-apt-repository universe
 RUN apt-get update -y && apt-get install -y dnsutils iputils-ping
