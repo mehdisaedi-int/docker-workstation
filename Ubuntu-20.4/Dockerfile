@@ -4,7 +4,6 @@ MAINTAINER HosseinAkhlaghpour@gmail.com
 ENV DEBIAN_FRONTEND=noninteractive
 EXPOSE 22 4000
 ENV DISPLAY :0
-
 ENV PATH /opt/conda/bin:$PATH
 
 RUN sudo apt-get update --fix-missing && sudo apt-get install -y wget bzip2 ca-certificates \
@@ -27,4 +26,8 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
 RUN chmod +x /tini && \
     sudo apt-get clean
 
+COPY developer /home/developer
+RUN sudo chown -R developer:users /home/developer
+
+# COPY nomachine/nxserver.sh /
 ENTRYPOINT ["/nxserver.sh"]
