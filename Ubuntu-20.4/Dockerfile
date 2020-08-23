@@ -18,11 +18,11 @@ RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
     sudo tar xvfz pycharm-professional-2020.2.tar.gz && \
     sudo rm pycharm-professional-2020.2.tar.gz
 
-ADD pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
-ADD pycharm/jetbrains-pycharm.desktop /usr/share/applications/
+COPY pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
+COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
 
+COPY developer /home/developer
+RUN sudo chown -R developer:users /home/developer
 
-ADD developer.tgz.lock /home/
-ADD nomachine/nxserver.developer.sh /
-
-ENTRYPOINT ["/nxserver.developer.sh"]
+# COPY nomachine/nxserver.sh /
+ENTRYPOINT ["/nxserver.sh"]
