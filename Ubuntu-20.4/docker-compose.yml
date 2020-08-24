@@ -1,7 +1,7 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:ubuntu-20.04-R
+    image: hossein20s/docker-workstation:ubuntu-20.04-anaconda
     container_name: workstation
     privileged: true
     ports:
