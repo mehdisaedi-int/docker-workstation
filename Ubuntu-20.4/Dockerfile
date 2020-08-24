@@ -23,7 +23,7 @@ RUN conda install netcdf4
 
 ENV TINI_VERSION v0.19.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini && \
+RUN sudo chmod +x /tini && \
     sudo apt-get clean
 
 ENTRYPOINT ["/nxserver.sh"]
