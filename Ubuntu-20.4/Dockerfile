@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:ubuntu-20.04-anaconda
+FROM hossein20s/docker-workstation:ubuntu-20.04-pycharmx`x`
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 ENV DEBIAN_FRONTEND=noninteractive
