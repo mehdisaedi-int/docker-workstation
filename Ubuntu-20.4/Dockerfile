@@ -6,20 +6,14 @@ EXPOSE 22 4000
 ENV DISPLAY :0
 ENV PATH /opt/conda/bin:$PATH
 
-# install PyCharm community
-RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
-    sudo wget -q http://download.jetbrains.com/python/pycharm-community-2020.2.tar.gz && \
-    sudo tar xvfz pycharm-community-2020.2.tar.gz && \
-    sudo rm pycharm-community-2020.2.tar.gz
+RUN apt-get update && apt-get install -y mysql-client && rm -rf /var/lib/apt
+# RUN sudo apt install -y build-essential python-dev libmysqlclient-dev libmysqlcppconn-dev
+RUN sudo apt-get update -y && sudo apt install -y pkg-config && sudo apt install -y libfreetype6-dev
 
-# install PyCharm professional
-RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
-    sudo wget -q http://download.jetbrains.com/python/pycharm-professional-2020.2.tar.gz && \
-    sudo tar xvfz pycharm-professional-2020.2.tar.gz && \
-    sudo rm pycharm-professional-2020.2.tar.gz
 
-COPY pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
-COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
+COPY ag38.yml /ag38.yml
+RUN conda env create -f /ag38.yml
+ENV PATH /opt/conda/envs/ag38/bin:$PATH
 
 COPY developer /home/developer
 RUN sudo chown -R developer:users /home/developer
