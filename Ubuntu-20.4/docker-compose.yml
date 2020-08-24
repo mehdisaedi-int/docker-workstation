@@ -14,6 +14,5 @@ services:
       - SYS_PTRACE
     volumes:
       - ${HOME}:/opt/host
-      # - ${HOME}/developer:/home/developer # to persists your home directory without saving the container
-      # - ${HOME}/.Xauthority:/home/developer/.Xauthority
-      - /dev/shm:/dev/shm
+      - ${HOME_MIRROE}:/home/developer # to persists your home directory run-- HOME_MIRROR=./developer and uncomment
+      # - ${HOME}/.Xauthority:/home/developer/.Xauthorimv
