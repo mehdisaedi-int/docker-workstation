@@ -24,7 +24,7 @@ RUN sudo apt-get install -y ssh \
 RUN sudo curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-jDUcD8J1WozbkOKB" -o nomachine.deb \
  && echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - \
 && sudo dpkg -i nomachine.deb
-RUN sudo adduser developer nomachine
+RUN sudo groupadd -r nomachine -g 433 && sudo adduser developer nomachine
 
 ADD developer.tgz /home/
 RUN sudo chown -R developer:users /home/developer
