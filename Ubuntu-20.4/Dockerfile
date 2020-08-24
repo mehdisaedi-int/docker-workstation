@@ -36,7 +36,7 @@ ENV LANGUAGE en_US.UTF-8
 RUN echo ${TIMEZONE} > /etc/timezone
 
 # Desktop
-RUN apt-get install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
+# RUN apt-get install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
 
 # Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -46,8 +46,8 @@ RUN apt update -y && apt install -y google-chrome-stable chromium-browser
 
 # Option1: Using unencrypted password/ specifying password
 RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
-&& echo '${USER} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-&& adduser ${USER} users
+&& echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+&& adduser ${USER} users && adduser ${USER} sudo
 
 # Option2: Using the same encrypted password as host
 #COPY /etc/group /etc/group
