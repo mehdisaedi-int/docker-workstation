@@ -10,9 +10,7 @@ services:
       DISPLAY: # for mac use docker.for.mac.host.internal:0, others are :0 or host.docker.internal:0
       USER: developer
       PASSWORD: developer
-    cap_add:
-      - SYS_PTRACE
     volumes:
       - ${HOME}:/opt/host
-      - ${HOME_MIRROE}:/home/developer # to persists your home directory run-- HOME_MIRROR=./developer and uncomment
+      - ${HOME_MIRROR}:/home/developer # to persists your home directory run-- export HOME_MIRROR=./developer and uncomment
       # - ${HOME}/.Xauthority:/home/developer/.Xauthorimv

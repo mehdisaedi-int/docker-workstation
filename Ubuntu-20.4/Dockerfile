@@ -13,9 +13,9 @@ ENV NOMACHINE_MD5 d268d38823489c9b3cffd5d618c05b22
 RUN sudo apt update &&  sudo apt install -y dialog apt-utils
 RUN echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
 # RUN sudo apt install -y lxde-core lxterminal
-# RUN sudo apt install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
-# RUN sudo apt install -y mate-desktop-environment-core
-RUN sudo apt install -y gnome-session gdm3
+RUN sudo apt install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
+RUN sudo apt install -y mate-desktop-environment-core
+# RUN sudo apt install -y gnome-session gdm3 # blank screen showed up
 
 # Installation of ssh is required if you want to connect to NoMachine server using SSH protocol when supported.
 # Comment it out if you don't need it or if you use NoMachine free.
@@ -28,6 +28,7 @@ RUN sudo apt install -y ssh && sudo service ssh start
 RUN sudo curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-jDUcD8J1WozbkOKB" -o nomachine.deb \
  && echo "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - \
 && sudo dpkg -i nomachine.deb
+# && rm nomachine.deb
 RUN sudo groupadd -r nomachine -g 433 && sudo adduser developer nomachine
 
 COPY developer /home/developer

@@ -1,4 +1,13 @@
 # PyCharm
 .idea/
 
-
+/Ubuntu-20.4/developer/.cache/
+/Ubuntu-20.4/developer/.config/
+/Ubuntu-20.4/developer/.dbus/
+/Ubuntu-20.4/developer/.gnupg/
+/Ubuntu-20.4/developer/.nx/
+/Ubuntu-20.4/developer/.qt/
+/Ubuntu-20.4/developer/.sudo_as_admin_successful
+/Ubuntu-20.4/developer/.Xauthority
+/Ubuntu-20.4/developer/.xsession-errors
+/Ubuntu-20.4/developer/.bash_history
