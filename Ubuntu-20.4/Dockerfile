@@ -1,12 +1,17 @@
 FROM ubuntu:20.04
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
+# docker build -t hossein20s/docker-workstation:base .
 ARG TIMEZONE="America/Los_Angeles"
 ARG USER=developer
 ARG UID=1000
 ARG GID=1000
 # default password for user
 ARG PW=developer
+
+ARG NOMACHINE_VERSION=6.11.2_1
+ARG NOMACHINE_PACKAGE_NAME=nomachine_6.11.2_1_amd64.deb
+ARG NOMACHINE_MD5=d268d38823489c9b3cffd5d618c05b22
 
 ENV DEBIAN_FRONTEND=noninteractive
 EXPOSE 22 4000
@@ -51,17 +56,14 @@ RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
 #COPY /etc/shadow /etc/shadow
 
 # Nomachine even though there is no desktop installed
+RUN apt install -y pulseaudio
+RUN apt install -y cups
 # http://download.nomachine.com/download/6.11.2_1/Linux/nomachine_6.11.2_1_amd64.deb doesn't exist
 # so I download it from https://www.nomachine.com/download/download&id=2 and store it in goolge drive
 # RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_VERSION}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
-RUN curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-jDUcD8J1WozbkOKB" -o nomachine.deb \
- && "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - \
-&& dpkg -i nomachine.deb && rm nomachine.deb
+RUN curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-jDUcD8J1WozbkOKB" -o /tmp/nomachine.deb \
+# && "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - \
+&& dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb
 RUN groupadd -r nomachine -g 433 && adduser ${USER} nomachine
 
-# Setup default user, when enter docker container
-USER ${UID}:${GID}
-WORKDIR /home/${USER}
-
-# ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "xterm"]
-ENTRYPOINT ["/bin/sh", "-c", "tail -f /dev/null"]
+ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
