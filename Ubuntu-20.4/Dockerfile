@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER Hossein Akhlaghpour
+MAINTAINER HosseinAkhlaghpour@gmail.com
 
 ARG TIMEZONE="America/Los_Angeles"
 ARG USER=developer
@@ -35,14 +35,10 @@ ENV LANGUAGE en_US.UTF-8
 
 RUN echo ${TIMEZONE} > /etc/timezone
 
-# Desktop
-# RUN apt-get install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
-
 # Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 RUN sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 RUN apt update -y && apt install -y google-chrome-stable chromium-browser
-
 
 # Option1: Using unencrypted password/ specifying password
 RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
@@ -53,6 +49,15 @@ RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
 #COPY /etc/group /etc/group
 #COPY /etc/passwd /etc/passwd
 #COPY /etc/shadow /etc/shadow
+
+# Nomachine even though there is no desktop installed
+# http://download.nomachine.com/download/6.11.2_1/Linux/nomachine_6.11.2_1_amd64.deb doesn't exist
+# so I download it from https://www.nomachine.com/download/download&id=2 and store it in goolge drive
+# RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_VERSION}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
+RUN curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-jDUcD8J1WozbkOKB" -o nomachine.deb \
+ && "${NOMACHINE_MD5} *nomachine.deb" | md5sum -c - \
+&& dpkg -i nomachine.deb && rm nomachine.deb
+RUN groupadd -r nomachine -g 433 && adduser ${USER} nomachine
 
 # Setup default user, when enter docker container
 USER ${UID}:${GID}
