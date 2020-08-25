@@ -7,10 +7,14 @@ services:
     ports:
       - 4444:4000
     environment:
-      DISPLAY: # for mac use docker.for.mac.host.internal:0, others are :0 or host.docker.internal:0
+      DISPLAY: docker.for.mac.host.internal:0 # for mac use docker.for.mac.host.internal:0, others are :0 or host.docker.internal:0
       USER: developer
       PASSWORD: developer
+    cap_add:
+      - SYS_PTRACE
     volumes:
       - ${HOME}:/opt/host
-      - ${HOME_MIRROR}:/home/developer # to persists your home directory run-- export HOME_MIRROR=./developer and uncomment
-      # - ${HOME}/.Xauthority:/home/developer/.Xauthorimv
+      # - ${HOME}/developer:/home/developer
+      # - ${HOME}/developer:/home/developer # to persists your home directory without saving the container
+      # - ${HOME}/.Xauthority:/home/developer/.Xauthority
+      - /dev/shm:/dev/shm
