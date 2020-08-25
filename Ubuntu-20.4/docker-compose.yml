@@ -1,11 +1,11 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:ubuntu-20.04-nomachine
+    image: hossein20s/docker-workstation:ubuntu-20.04-nomachine #1step # ubuntu-20.04-anaconda # ubuntu-20.04-nomachine-mate # gnu-bank
     container_name: workstation
     privileged: true
     ports:
-      - 4444:4000
+      - 4448:4000
     environment:
       DISPLAY: docker.for.mac.host.internal:0 # for mac use docker.for.mac.host.internal:0, others are :0 or host.docker.internal:0
       USER: developer
@@ -14,7 +14,8 @@ services:
       - SYS_PTRACE
     volumes:
       - ${HOME}:/opt/host
-      # - ${HOME}/developer:/home/developer
-      # - ${HOME}/developer:/home/developer # to persists your home directory without saving the container
+      # - /tmp/developer.pycharm:/home/developer
+      - ${HOME}/nx-desktop/NX-etc:/usr/NX/etc
+      - ./developer:/home/developer # to persists your home directory without saving the container
       # - ${HOME}/.Xauthority:/home/developer/.Xauthority
       - /dev/shm:/dev/shm

@@ -31,10 +31,10 @@ RUN sudo curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8
 # && rm nomachine.deb
 RUN sudo groupadd -r nomachine -g 433 && sudo adduser developer nomachine
 
-COPY developer /home/developer
-RUN sudo chown -R developer:users /home/developer
+ADD developer /home/developer
+RUN sudo chown -R developer:nomachine /home/developer
 
-COPY nomachine/etc /usr/NX/etc
+ADD nomachine/etc /usr/NX/etc
 RUN sudo chown -R nx:root /usr/NX/etc
 COPY nomachine/nxserver.sh /
 ENTRYPOINT ["/nxserver.sh"]
