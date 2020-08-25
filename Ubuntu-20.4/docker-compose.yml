@@ -1,11 +1,12 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:base
+    image: hossein20s/docker-workstation:x11
     container_name: workstation
+#    command: tail -f /dev/null
     privileged: true
     environment:
-      DISPLAY: $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose
+      DISPLAY: $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       USER: developer
       PASSWORD: developer
     cap_add:
