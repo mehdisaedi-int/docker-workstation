@@ -1,10 +1,12 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:x11
+    image: hossein20s/docker-workstation:lbuntu #hossein20s/docker-workstation:ubuntu-20.04-nomachine #
     container_name: workstation
-#    command: tail -f /dev/null
+#     command: tail -f /dev/null
     privileged: true
+    ports:
+      - 4321:4000
     environment:
       DISPLAY: $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       USER: developer
@@ -14,3 +16,7 @@ services:
     volumes:
       - ${HOME}:/opt/host
       - /dev/shm:/dev/shm
+      - ${HOME}/developer3:/home/developer
+      # - ./nomachine/etc/users.db:/usr/NX/etc/users.db
+      # - ./nomachine/etc/server.cfg:/usr/NX/etc/server.cfg
+      # - ${HOME}/desktop2-etc:/usr/NX/etc

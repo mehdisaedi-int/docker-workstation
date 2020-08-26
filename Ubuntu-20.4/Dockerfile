@@ -1,27 +1,22 @@
-FROM hossein20s/docker-workstation:base
+FROM hossein20s/docker-workstation:x11
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:x11 .
+# docker build -t hossein20s/docker-workstation:lbuntu .
+# use developer as the main user to install-> use sudo for any RUN command
+
 ENV DEBIAN_FRONTEND=noninteractive
 EXPOSE 22 4000
 ENV DISPLAY :0
 
-ARG TIMEZONE="America/Los_Angeles"
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-RUN echo ${TIMEZONE} > /etc/timezone
+RUN sudo apt update &&  sudo apt install -y dialog apt-utils
+RUN echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+RUN sudo apt install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
+RUN sudo apt install -y mate-desktop-environment-core
 
-ARG USER=developer
-ARG UID=1000
-ARG GID=1000
+COPY nomachine/nxserver.sh /
+RUN sudo chmod 755 /nxserver.sh
 
-COPY ${USER} /home/${USER}
-RUN chown -R ${USER}:users /home/${USER}
+COPY nomachine/etc /usr/NX/etc
 
-# Setup default user, when enter docker container
-USER ${UID}:${GID}
-WORKDIR /home/${USER}
-
-# ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "xterm"]
-ENTRYPOINT ["/bin/sh", "-c", "tail -f /dev/null"]
+ENTRYPOINT ["/nxserver.sh"]
+# ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
