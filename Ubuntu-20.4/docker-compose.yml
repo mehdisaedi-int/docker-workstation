@@ -1,7 +1,7 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:genome-desktop
+    image: hossein20s/docker-workstation:anaconda
     container_name: workstation
 #     command: tail -f /dev/null
     privileged: true
