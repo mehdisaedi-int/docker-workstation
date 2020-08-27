@@ -1,7 +1,7 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:conda
+    image: hossein20s/docker-workstation:pycharm
     container_name: workstation
 #     command: tail -f /dev/null
     privileged: true
