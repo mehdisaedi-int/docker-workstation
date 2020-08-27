@@ -7,11 +7,8 @@ MAINTAINER HosseinAkhlaghpour@gmail.com
 ENV DEBIAN_FRONTEND=noninteractive
 EXPOSE 22 4000
 ENV DISPLAY :0
+ARG USER=developer
 ARG UID=1000
-
-# localozation
-ARG TIMEZONE="America/Los_Angeles"
-RUN echo ${TIMEZONE} > /etc/timezone
 
 ENV PATH /opt/conda/bin:$PATH
 
@@ -33,3 +30,4 @@ COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
 ENTRYPOINT ["/nxserver.sh"]
 
 USER $UID
+WORKDIR /home/${USER}
