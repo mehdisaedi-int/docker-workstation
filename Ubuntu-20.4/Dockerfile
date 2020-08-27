@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:base
+FROM hossein20s/docker-workstation:nomachine
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:nomachine .
+# docker build -t hossein20s/docker-workstation:genome-desktop .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -9,53 +9,13 @@ EXPOSE 22 4000
 ENV DISPLAY :0
 
 # localozation
-RUN apt install -y locales locales-all
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
-
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
-RUN sudo apt update &&  sudo apt install -y dialog apt-utils
-RUN echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
-RUN sudo apt install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
-RUN sudo apt install -y mate-desktop-environment-core
-
-
-# edit the Nomachine node configuration;
-# caution: both node.cfg and server.cfg files
-# must be edited for the changes to take effect;
-# define the location and names of the config files
-ARG NX_NODE_CFG=/usr/NX/etc/node.cfg
-ARG NX_SRV_CFG=/usr/NX/etc/server.cfg
-# (note we edit the config files *[i]n place* (hence sed -i)
-# and replace *[c]omplete* lines using "c\" switch):
-# - replace the default desktop command (DefaultDesktopCommand) used by NoMachine with the preferred (lightweight) desktop
-RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxqt"' $NX_NODE_CFG
-# RUN sed -i '/AvailableSessionTypes/c\AvailableSessionTypes physical-desktop,unix-xsession-default' $NX_SRV_CFG
-
-# # - replace the location of the nxserver log file, because the default one required sudo
-# # (but first create a new folder and empty logfile inside the user home folder)
-# COPY nxserver.log /tmp
-# RUN chown $NX_USER:$NX_GID /tmp/nxserver.log
-# RUN sed -i "/SystemLogFile/c\SystemLogFile ${LOG_FOLDER}nxserver.log" $NX_NODE_CFG && \
-# 	sed -i "/SystemLogFile/c\SystemLogFile ${LOG_FOLDER}nxserver.log" $NX_SRV_CFG
-
-# # instead of blind editing using sed, simply edit the config files
-# # outside the container (in git), and then copy them to the container
-# COPY nomachine/etc/node.cfg /usr/NX/etc/node.cfg
-# COPY nomachine/etc/server.cfg /usr/NX/etc/server.cfg
-
-# use environment variables USER and PASSWORD (passed by docker run -e)
-# to create a priviledged user account, and set it up for use by SSH and NoMachine;
-# note that ADD is executed by the host, not the container (unlike RUN)
-ADD nomachine/nxserver.sh /
-RUN chmod 755 /nxserver.sh
+RUN sudo apt update && sudo apt install -y ubuntu-unity-desktop
+# from https://www.nomachine.com/AR04K00667
+RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/etc/X11/Xsession \'gnome-session -session=ubuntu\' "' $NX_NODE_CFG
+# sudo apt -y install gnome-session gnome-terminal
+# RUN sudo apt install -y tasksel && sudo tasksel install ubuntu-desktop-minimal
 
 ENTRYPOINT ["/nxserver.sh"]
-# ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
-
-# Switch back to unpriviledged user (using its UID, not name)
-# to avoid accidental container runs as root
-USER $NX_UID
