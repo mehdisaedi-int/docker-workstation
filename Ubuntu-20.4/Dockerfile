@@ -12,20 +12,14 @@ ARG UID=1000
 
 ENV PATH /opt/conda/bin:$PATH
 
-# install PyCharm community
-RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
-    sudo wget -q http://download.jetbrains.com/python/pycharm-community-2020.2.tar.gz && \
-    sudo tar xvfz pycharm-community-2020.2.tar.gz && \
-    sudo rm pycharm-community-2020.2.tar.gz
+#Install R
+RUN sudo apt-get install -y r-base
 
-# install PyCharm professional
-RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
-    sudo wget -q http://download.jetbrains.com/python/pycharm-professional-2020.2.tar.gz && \
-    sudo tar xvfz pycharm-professional-2020.2.tar.gz && \
-    sudo rm pycharm-professional-2020.2.tar.gz
-
-COPY pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
-COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
+#Install R-studio - https://www.rstudio.com/products/rstudio/download-server/
+RUN sudo apt-get install -y gdebi-core
+RUN sudo wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.3.1073-amd64.deb -o /tmp/rstudio-server.deb
+# RUN sudo gdebi rstudio-server.deb
+# RUN sudo rm rstudio-server.deb
 
 ENTRYPOINT ["/nxserver.sh"]
 
