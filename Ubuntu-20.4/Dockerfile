@@ -12,6 +12,10 @@ ARG UID=1000
 
 ENV PATH /opt/conda/bin:$PATH
 
+RUN sudo apt-get update && sudo apt-get install -y mysql-client
+# RUN sudo apt install -y build-essential python-dev libmysqlclient-dev libmysqlcppconn-dev
+RUN sudo apt install -y pkg-config && sudo apt install -y libfreetype6-dev
+
 # install PyCharm community
 RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
     sudo wget -q http://download.jetbrains.com/python/pycharm-community-2020.2.tar.gz && \
