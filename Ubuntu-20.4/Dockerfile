@@ -12,9 +12,10 @@ ENV DISPLAY :0
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
+ARG NX_NODE_CFG=/usr/NX/etc/node.cfg
 RUN sudo apt update && sudo apt install -y ubuntu-unity-desktop
 # from https://www.nomachine.com/AR04K00667
-RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/etc/X11/Xsession \'gnome-session -session=ubuntu\' "' $NX_NODE_CFG
+RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/etc/X11/Xsession \x27gnome-session -session=ubuntu\x27 "' $NX_NODE_CFG
 # sudo apt -y install gnome-session gnome-terminal
 # RUN sudo apt install -y tasksel && sudo tasksel install ubuntu-desktop-minimal
 
