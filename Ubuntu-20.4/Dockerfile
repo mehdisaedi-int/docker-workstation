@@ -1,8 +1,13 @@
 FROM hossein20s/docker-workstation:base
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:nomachine .
-# use developer as the main user to install-> use sudo for any RUN command
+# docker build -t hossein20s/docker-workstation:base .
+ARG TIMEZONE="America/Los_Angeles"
+ARG USER=developer
+
+ARG NOMACHINE_VERSION=6.11.2_1
+ARG NOMACHINE_PACKAGE_NAME=nomachine_6.11.2_1_amd64.deb
+ARG NOMACHINE_MD5=d268d38823489c9b3cffd5d618c05b22
 
 ENV DEBIAN_FRONTEND=noninteractive
 EXPOSE 22 4000
@@ -56,6 +61,8 @@ RUN chmod 755 /nxserver.sh
 ENTRYPOINT ["/nxserver.sh"]
 # ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
 
-# Switch back to unpriviledged user (using its UID, not name)
+# Switch back to unpriviledged user
 # to avoid accidental container runs as root
-USER $NX_UID
+
+USER ${USER}
+WORKDIR /home/${USER}
