@@ -1,7 +1,7 @@
 FROM hossein20s/docker-workstation:base
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:base .
+# docker build -t hossein20s/docker-workstation:nomachine .
 ARG TIMEZONE="America/Los_Angeles"
 ARG USER=developer
 
