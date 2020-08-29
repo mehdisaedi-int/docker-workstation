@@ -66,4 +66,6 @@ RUN curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-j
 && dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb
 RUN groupadd -r nomachine -g 433 && adduser ${USER} nomachine
 
+RUN chmod 440 /etc/sudoers && chmod 644 /usr/lib/sudo/sudoers.so
+
 ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
