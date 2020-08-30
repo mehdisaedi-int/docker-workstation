@@ -1,5 +1,5 @@
 version: '3'
-services:
+services:c
   workstation:
     image: hossein20s/docker-workstation:unity3D
     container_name: workstation
@@ -17,7 +17,7 @@ services:
     volumes:
       - ${HOME}:/opt/host
       - /dev/shm:/dev/shm
-      - ${HOME}/docker-workstation/Ubuntu-20.04/developer:/home/developer # uncomment to persists user home
+      - ${HOME}/docker-workstation/Ubuntu-20.04/cdeveloper:/home/developer # uncomment to persists user home
       # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
       # you need to : touch /tmp/.docker.xauth
       # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
