@@ -1,7 +1,7 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:nomachine #hossein20s/docker-workstation:ubuntu-20.04-nomachine #
+    image: hossein20s/docker-workstation:nomachine
     container_name: workstation
 #     command: tail -f /dev/null
     privileged: true

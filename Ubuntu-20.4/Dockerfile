@@ -58,11 +58,12 @@ RUN apt install -y mate-desktop-environment-core
 ADD nomachine/nxserver.sh /
 RUN chmod 755 /nxserver.sh
 
-# ENTRYPOINT ["/nxserver.sh"]
-ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
+ENTRYPOINT ["/nxserver.sh"]
+# ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
 
 # Switch back to unpriviledged user
 # to avoid accidental container runs as root
-
+# this will cause problem, giving this error
+# effective uid is not 0, is /usr/bin/sudo on a file system with the 'nosuid' option set or an NFS file system without root privileges
 #USER ${USER}
 #WORKDIR /home/${USER}
