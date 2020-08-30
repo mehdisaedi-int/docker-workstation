@@ -47,7 +47,7 @@ RUN apt update -y && apt install -y google-chrome-stable chromium-browser
 
 # Option1: Using unencrypted password/ specifying password
 RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
-# && echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+&& echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
 && adduser ${USER} users && adduser ${USER} sudo
 
 # Option2: Using the same encrypted password as host
