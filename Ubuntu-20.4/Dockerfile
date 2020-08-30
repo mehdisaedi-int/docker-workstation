@@ -62,7 +62,7 @@ RUN apt install -y cups
 # so I download it from https://www.nomachine.com/download/download&id=2 and store it in goolge drive
 # RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_VERSION}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
 RUN curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-jDUcD8J1WozbkOKB" -o /tmp/nomachine.deb \
-# && "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - \
+&& echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - \
 && dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb
 RUN groupadd -r nomachine -g 433 && adduser ${USER} nomachine
 
