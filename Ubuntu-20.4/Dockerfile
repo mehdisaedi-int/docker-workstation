@@ -22,22 +22,22 @@ ENV LANGUAGE en_US.UTF-8
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
-RUN sudo apt update &&  sudo apt install -y dialog apt-utils
-RUN echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
-RUN sudo apt install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
-RUN sudo apt install -y mate-desktop-environment-core
+RUN apt update &&  apt install -y dialog apt-utils
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN apt install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras
+RUN apt install -y mate-desktop-environment-core
 
 
 # edit the Nomachine node configuration;
 # caution: both node.cfg and server.cfg files
 # must be edited for the changes to take effect;
 # define the location and names of the config files
-ARG NX_NODE_CFG=/usr/NX/etc/node.cfg
-ARG NX_SRV_CFG=/usr/NX/etc/server.cfg
+#ARG NX_NODE_CFG=/usr/NX/etc/node.cfg
+#ARG NX_SRV_CFG=/usr/NX/etc/server.cfg
 # (note we edit the config files *[i]n place* (hence sed -i)
 # and replace *[c]omplete* lines using "c\" switch):
 # - replace the default desktop command (DefaultDesktopCommand) used by NoMachine with the preferred (lightweight) desktop
-RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxqt"' $NX_NODE_CFG
+# RUN sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxqt"' $NX_NODE_CFG
 # RUN sed -i '/AvailableSessionTypes/c\AvailableSessionTypes physical-desktop,unix-xsession-default' $NX_SRV_CFG
 
 # # - replace the location of the nxserver log file, because the default one required sudo
@@ -58,11 +58,11 @@ RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startl
 ADD nomachine/nxserver.sh /
 RUN chmod 755 /nxserver.sh
 
-ENTRYPOINT ["/nxserver.sh"]
-# ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
+# ENTRYPOINT ["/nxserver.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
 
 # Switch back to unpriviledged user
 # to avoid accidental container runs as root
 
-USER ${USER}
-WORKDIR /home/${USER}
+#USER ${USER}
+#WORKDIR /home/${USER}
