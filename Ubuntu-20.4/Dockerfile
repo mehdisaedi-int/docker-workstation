@@ -67,11 +67,6 @@ RUN sudo apt update; \
     && sudo rm -rf /var/lib/apt/lists/*
 RUN sudo apt-get update && sudo apt-get install -y git git sudo tzdata && sudo rm -rf /var/lib/apt/lists/*
 
-# add credentials on build
-RUN mkdir /home/${USER}/.ssh/
-COPY id_rsa /home/${USER}/.ssh/id_rsa
-COPY .gitconfig /home/${USER}/.gitconfig
-
 RUN sudo wget -nv ${DOWNLOAD_URL} -O UnitySetup; \
     # compare sha1 if given
     sudo chmod +x UnitySetup; \
@@ -112,12 +107,6 @@ RUN yes | sudo ./UnitySetup --verbose --unattended \
     # make a directory for the certificate Unity needs to run
     sudo mkdir -p $HOME/.local/share/unity3d/Certificates/
 
-RUN cd /home/${USER} && \
-     git clone --depth=1 https://github.com/EpicGames/UnrealEngine.git && \
-	cd UnrealEngine && \
-	./Setup.sh && \
-	./GenerateProjectFiles.sh && \
-	make
 
 # I use this to create CACerts.pem
 # openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out CACerts.pem
