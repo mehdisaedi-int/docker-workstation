@@ -5,10 +5,6 @@ MAINTAINER HosseinAkhlaghpour@gmail.com
 ARG TIMEZONE="America/Los_Angeles"
 ARG USER=developer
 
-ARG NOMACHINE_VERSION=6.11.2_1
-ARG NOMACHINE_PACKAGE_NAME=nomachine_6.11.2_1_amd64.deb
-ARG NOMACHINE_MD5=d268d38823489c9b3cffd5d618c05b22
-
 ENV DEBIAN_FRONTEND=noninteractive
 EXPOSE 22 4000
 ENV DISPLAY :0
@@ -32,12 +28,12 @@ RUN apt install -y mate-desktop-environment-core
 # caution: both node.cfg and server.cfg files
 # must be edited for the changes to take effect;
 # define the location and names of the config files
-#ARG NX_NODE_CFG=/usr/NX/etc/node.cfg
+ARG NX_NODE_CFG=/usr/NX/etc/node.cfg
 #ARG NX_SRV_CFG=/usr/NX/etc/server.cfg
 # (note we edit the config files *[i]n place* (hence sed -i)
 # and replace *[c]omplete* lines using "c\" switch):
 # - replace the default desktop command (DefaultDesktopCommand) used by NoMachine with the preferred (lightweight) desktop
-# RUN sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxqt"' $NX_NODE_CFG
+RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxqt"' $NX_NODE_CFG
 # RUN sed -i '/AvailableSessionTypes/c\AvailableSessionTypes physical-desktop,unix-xsession-default' $NX_SRV_CFG
 
 # # - replace the location of the nxserver log file, because the default one required sudo
