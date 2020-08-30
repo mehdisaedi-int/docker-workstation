@@ -76,8 +76,8 @@ RUN sudo wget -nv ${DOWNLOAD_URL} -O UnitySetup; \
       sudo echo "no sha1 given, skipping checksum"; \
     fi
 # make sure your domain is accepted
-RUN touch /home/${USER}/.ssh/known_hosts
-RUN ssh-keyscan github.com >> /home/${USER}/.ssh/known_hosts
+# RUN touch /home/${USER}/.ssh/known_hosts
+# RUN ssh-keyscan github.com >> /home/${USER}/.ssh/known_hosts
 
 # install unity
 RUN yes | sudo ./UnitySetup --verbose --unattended \
