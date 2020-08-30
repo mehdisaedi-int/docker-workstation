@@ -36,4 +36,3 @@ RUN sudo chmod +x /tini && \
 
 ENTRYPOINT ["/nxserver.sh"]
 
-USER $UID
