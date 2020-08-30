@@ -1,7 +1,7 @@
 FROM hossein20s/docker-workstation:conda-pycharm
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:unreal .
+# docker build -t hossein20s/docker-workstation:unity3D .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
