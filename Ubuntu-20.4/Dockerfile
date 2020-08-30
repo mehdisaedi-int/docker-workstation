@@ -33,5 +33,5 @@ COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
 
 ENTRYPOINT ["/nxserver.sh"]
 
-USER $UID
-WORKDIR /home/${USER}
+# USER $UID
+# WORKDIR /home/${USER}
