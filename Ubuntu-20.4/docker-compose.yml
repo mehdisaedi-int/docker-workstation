@@ -15,5 +15,6 @@ services:
       - SYS_PTRACE
     volumes:
       - ${HOME}:/opt/host
+      - ${HOME}/.Xauthority:/home/developer/.Xauthority
       - /dev/shm:/dev/shm
       # - ${HOME}/docker-workstation/developer:/home/developer # uncomment to persists user home
