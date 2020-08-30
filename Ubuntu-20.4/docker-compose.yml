@@ -1,7 +1,7 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:base
+    image: hossein20s/docker-workstation:zero
     container_name: workstation
     privileged: true
     environment:
