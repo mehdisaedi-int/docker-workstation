@@ -60,5 +60,5 @@ RUN sudo wget https://cdn.rstudio.com/r/${OS_IDENTIFIER}/pkgs/r-${R_VERSION}_1_a
 
 ENTRYPOINT ["/nxserver.sh"]
 
-USER $UID
-WORKDIR /home/${USER}
+# USER $UID
+# WORKDIR /home/${USER}
