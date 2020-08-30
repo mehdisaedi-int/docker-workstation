@@ -16,8 +16,9 @@ ARG SHA1=13c24c5268a1a97e1e212321dc47a8890f0934ca
 
 RUN sudo apt update; \
     sudo apt install -y \
-    ffmpeg \
-    gconf-service \
+    ffmpeg
+
+RUN gconf-service \
     lib32gcc1 \
     lib32stdc++6 \
     libasound2 \
@@ -25,16 +26,17 @@ RUN sudo apt update; \
     libc6-i386 \
     libcairo2 \
     libcap2 \
-    libcups2 \
-    libarchive13 \
+    libcups2
+
+RUN libarchive13 \
     libasound2 \
     libdbus-1-3 \
     libexpat1 \
     libfontconfig1 \
     libfreetype6 \
-    libgcc1 \
+    libgcc1
 #    libgconf2-4 \
-    libgdk-pixbuf2.0-0 \
+RUN libgdk-pixbuf2.0-0 \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libglu1-mesa \
@@ -42,9 +44,9 @@ RUN sudo apt update; \
     libgtk-3-0 \
     libnspr4 \
     libnss3 \
-    libpango1.0-0 \
+    libpango1.0-0
 #    libsoup2.4 \
-    libstdc++6 \
+RUN libstdc++6 \
     libx11-6 \
     libxcomposite1 \
     libxcursor1 \
@@ -55,8 +57,8 @@ RUN sudo apt update; \
     libxrandr2 \
     libxrender1 \
     libxtst6 \
-    zlib1g \
-    debconf \
+    zlib1g
+RUN debconf \
     npm \
     xdg-utils \
     lsb-release \
