@@ -15,3 +15,10 @@
 /Ubuntu-20.4/developer/.sudo_as_admin_successful
 /Ubuntu-20.4/developer/.xsession-errors
 /Ubuntu-20.4/developer/.bash_history
+/Ubuntu-20.04/cdeveloper/.cache/dconf/
+/Ubuntu-20.04/cdeveloper/.config/pulse/
+/Ubuntu-20.04/cdeveloper/.dbus/session-bus/
+/Ubuntu-20.04/cdeveloper/.nx/
+/Ubuntu-20.04/cdeveloper/.qt/
+/Ubuntu-20.04/cdeveloper/.Xauthority
+/Ubuntu-20.04/cdeveloper/.xsession-errors
