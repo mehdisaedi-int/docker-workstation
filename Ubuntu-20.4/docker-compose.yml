@@ -21,7 +21,7 @@ services:
       # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
       # you need to : touch /tmp/.docker.xauth
       # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
-      - /tmp/.X11-unix;/tmp/.X11-unix
-      - /tmp/.docker.xauth;/tmp/.docker.xauth
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /tmp/.docker.xauth:/tmp/.docker.xauthx
 
 
