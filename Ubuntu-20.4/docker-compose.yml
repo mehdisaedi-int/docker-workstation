@@ -1,7 +1,7 @@
 version: '3'
-services:c
+services:
   workstation:
-    image: hossein20s/docker-workstation:unity3D
+    image: hossein20s/docker-workstation:nomachine
     container_name: workstation
 #     command: tail -f /dev/null
     privileged: true
@@ -17,11 +17,16 @@ services:c
     volumes:
       - ${HOME}:/opt/host
       - /dev/shm:/dev/shm
+      # - ${HOME}/docker-workstation/Ubuntu-20.4/nomachine/etc/server.cfg:/usr/NX/etc/server.cfg
       - ${HOME}/docker-workstation/Ubuntu-20.04/cdeveloper:/home/developer # uncomment to persists user home
       # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
       # you need to : touch /tmp/.docker.xauth
       # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - /tmp/.docker.xauth:/tmp/.docker.xauthx
+      # - /tmp/.X11-unix:/tmp/.X11-unix
+      # - /tmp/.docker.xauth:/tmp/.docker.xauthx
+      - dev:/opt/ml
+volumes:
+  dev:
+    external: true
 
 
