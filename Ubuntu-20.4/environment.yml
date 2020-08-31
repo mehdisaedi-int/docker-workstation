@@ -1,0 +1,14 @@
+name: myenv
+channels:
+  - conda-forge
+dependencies:
+  - nomkl
+  - dask
+  - numpy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - tini
+  - pytorch
+  - torchvision
+

@@ -1,7 +1,7 @@
 FROM hossein20s/docker-workstation:conda
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:conda-pycharm .
+# docker build -t hossein20s/docker-workstation:pytorch .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,24 +12,17 @@ ARG UID=1000
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN sudo apt-get update && sudo apt-get install -y mysql-client
-# RUN sudo apt install -y build-essential python-dev libmysqlclient-dev libmysqlcppconn-dev
-RUN sudo apt install -y pkg-config && sudo apt install -y libfreetype6-dev
+# Create the environment:
+COPY environment.yml .
+RUN conda env create -f environment.yml
 
-# install PyCharm community
-RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
-    sudo wget -q http://download.jetbrains.com/python/pycharm-community-2020.2.tar.gz && \
-    sudo tar xvfz pycharm-community-2020.2.tar.gz && \
-    sudo rm pycharm-community-2020.2.tar.gz
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
 
-# install PyCharm professional
-RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
-    sudo wget -q http://download.jetbrains.com/python/pycharm-professional-2020.2.tar.gz && \
-    sudo tar xvfz pycharm-professional-2020.2.tar.gz && \
-    sudo rm pycharm-professional-2020.2.tar.gz
+# Make sure the environment is activated:
+RUN echo "Make sure flask is installed:"
+RUN python -c "import flask"
 
-COPY pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
-COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
 
 ENTRYPOINT ["/nxserver.sh"]
 
