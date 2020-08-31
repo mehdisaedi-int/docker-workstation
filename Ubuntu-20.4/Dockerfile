@@ -19,11 +19,6 @@ RUN conda env create -f environment.yml
 # Make RUN commands use the new environment:
 SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
 
-# Make sure the environment is activated:
-RUN echo "Make sure flask is installed:"
-RUN python -c "import flask"
-
-
 ENTRYPOINT ["/nxserver.sh"]
 
 # USER $UID
