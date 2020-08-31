@@ -17,6 +17,7 @@ services:
     volumes:
       - ${HOME}:/opt/host
       - /dev/shm:/dev/shm
+      - /media/developer/docker/apps:/opt/apps
       # - ${HOME}/docker-workstation/developer:/home/developer # uncomment to persists user home
       # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
       # you need to : touch /tmp/.docker.xauth
