@@ -1,7 +1,7 @@
 FROM hossein20s/docker-workstation:conda
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:pytorch .
+# docker build -t hossein20s/docker-workstation:ag .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
