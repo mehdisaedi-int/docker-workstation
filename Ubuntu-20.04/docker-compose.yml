@@ -26,10 +26,20 @@ services:
       # - /tmp/.docker.xauth:/tmp/.docker.xauthx
       - dev:/opt/ml
       - ag:/opt/dev
-  ansible:
-    image: ansible/ansible:ubuntu1604py3
-    container_name: ansible
+  mysql-workbench:
+    image: linuxserver/mysql-workbench
+    container_name: mysql-workbench
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    ports:
+      - 3000:3000
+    cap_add:
+      - IPC_LOCK
+    restart: unless-stopped
     volumes:
+      - /path/to/config:/config
       - ${HOME}:/opt/host
       - /dev/shm:/dev/shm
       - ${HOME}/developer:/home/developer # uncomment to persists user home

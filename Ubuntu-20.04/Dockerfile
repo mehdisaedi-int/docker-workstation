@@ -10,9 +10,14 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
+RUN sudo apt install -y ansible
+
+# Create the environment:
+COPY environment.yml .
+RUN conda env create -f environment.yml
+
 RUN sudo apt -y upgrade
 
-RUN sudo apt install -y ansible
 
 COPY nomachine/nxserver.sh /
 RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
