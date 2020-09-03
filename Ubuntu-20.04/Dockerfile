@@ -24,5 +24,5 @@ RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
 
 ENTRYPOINT ["/nxserver.sh"]
 
-USER $UID
-WORKDIR /home/${USER}
+#USER $UID
+#WORKDIR /home/${USER}
