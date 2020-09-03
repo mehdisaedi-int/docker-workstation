@@ -16,6 +16,8 @@ ENV PATH /opt/conda/bin:$PATH
 COPY environment.yml .
 RUN conda env create -f environment.yml
 
+RUN sudo apt -y upgrade
+
 # Make RUN commands use the new environment:
 SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
 
