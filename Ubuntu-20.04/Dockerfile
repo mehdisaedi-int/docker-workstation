@@ -10,6 +10,8 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
+RUN sudo apt -y upgrade
+
 COPY nomachine/nxserver.sh /
 RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
 
