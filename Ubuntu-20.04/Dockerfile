@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:pytorch
+FROM hossein20s/docker-workstation:personal
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:personal .
@@ -10,13 +10,13 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
-RUN sudo apt install -y ansible
+# RUN sudo apt install -y ansible
 
 # Create the environment:
 COPY environment.yml .
-RUN conda env create -f environment.yml
+RUN conda env update --name ag --file environment.yml
 
-RUN sudo apt -y upgrade
+# RUN sudo apt -y upgrade
 
 
 COPY nomachine/nxserver.sh /
