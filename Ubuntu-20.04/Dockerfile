@@ -1,5 +1,6 @@
 FROM hossein20s/docker-workstation:conda-pycharm
 MAINTAINER HosseinAkhlaghpour@gmail.com
+# TODO: You need to copy CACerts.pem to here before runing this
 
 # docker build -t hossein20s/docker-workstation:unity3D .
 # use developer as the main user to install-> use sudo for any RUN command
@@ -18,7 +19,7 @@ RUN sudo apt update; \
     sudo apt install -y \
     ffmpeg
 
-RUN gconf-service \
+RUN sudo apt install -y gconf-service \
     lib32gcc1 \
     lib32stdc++6 \
     libasound2 \
@@ -28,7 +29,7 @@ RUN gconf-service \
     libcap2 \
     libcups2
 
-RUN libarchive13 \
+RUN sudo apt install -y libarchive13 \
     libasound2 \
     libdbus-1-3 \
     libexpat1 \
@@ -36,7 +37,7 @@ RUN libarchive13 \
     libfreetype6 \
     libgcc1
 #    libgconf2-4 \
-RUN libgdk-pixbuf2.0-0 \
+RUN sudo apt install -y libgdk-pixbuf2.0-0 \
     libgl1-mesa-glx \
     libglib2.0-0 \
     libglu1-mesa \
@@ -46,7 +47,7 @@ RUN libgdk-pixbuf2.0-0 \
     libnss3 \
     libpango1.0-0
 #    libsoup2.4 \
-RUN libstdc++6 \
+RUN sudo apt install -y libstdc++6 \
     libx11-6 \
     libxcomposite1 \
     libxcursor1 \
@@ -58,16 +59,17 @@ RUN libstdc++6 \
     libxrender1 \
     libxtst6 \
     zlib1g
-RUN debconf \
+
+RUN sudo apt install -y debconf \
     npm \
     xdg-utils \
     lsb-release \
     libpq5 \
     xvfb \
     wget \
+    tzdata \
     && sudo apt clean \
     && sudo rm -rf /var/lib/apt/lists/*
-RUN sudo apt-get update && sudo apt-get install -y git git sudo tzdata && sudo rm -rf /var/lib/apt/lists/*
 
 RUN sudo wget -nv ${DOWNLOAD_URL} -O UnitySetup; \
     # compare sha1 if given
