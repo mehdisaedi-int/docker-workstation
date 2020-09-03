@@ -25,9 +25,18 @@ services:
       # - /tmp/.X11-unix:/tmp/.X11-unix
       # - /tmp/.docker.xauth:/tmp/.docker.xauthx
       - dev:/opt/ml
-      - autogrid:/opt/dev
+      - ag:/opt/dev
+  ansible:
+    image: ansible/ansible:ubuntu1604py3
+    container_name: ansible
+    volumes:
+      - ${HOME}:/opt/host
+      - /dev/shm:/dev/shm
+      - ${HOME}/developer:/home/developer # uncomment to persists user home
+      - dev:/opt/ml
+      - ag:/opt/dev
 volumes:
-  autogrid:
+  ag:
     external: true
   dev:
     external: true

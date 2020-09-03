@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:dev
+FROM hossein20s/docker-workstation:pytorch
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:personal .
@@ -11,6 +11,8 @@ ARG USER=developer
 ARG UID=1000
 
 RUN sudo apt -y upgrade
+
+RUN sudo apt install -y ansible
 
 COPY nomachine/nxserver.sh /
 RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
