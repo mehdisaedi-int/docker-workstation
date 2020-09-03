@@ -11,7 +11,7 @@ ARG USER=developer
 ARG UID=1000
 
 #RUN sudo apt install -y ansible
-RUN sudo apt install -y python3-dev && sudo apt install -y libmysqlclient-dev && sudo apt install -y default-libmysqlclient-dev
+RUN sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
 
 # Create the environment:
 COPY environment.yml .
