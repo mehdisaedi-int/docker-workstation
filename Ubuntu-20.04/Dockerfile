@@ -20,6 +20,10 @@ RUN conda env update --name ag --file environment.yml
 
 # RUN sudo apt -y upgrade
 
+RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps/bin && sudo chmod g+w /opt/apps/bin
+ENV PATH /opt/apps/bin:$PATH
+
+COPY /opt/apps/kafkatool2/.install4j/install4j_qqmdbk-kafkatool.desktop /usr/share/applications/
 
 COPY nomachine/nxserver.sh /
 RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
