@@ -41,6 +41,9 @@ RUN sudo wget https://golang.org/dl/go1.15.1.linux-amd64.tar.gz \
 && sudo tar -C /opt/apps -xzf go1.15.1.linux-amd64.tar.gz \
 && sudo rm go1.15.1.linux-amd64.tar.gz
 
+RUN sudo apt -y upgrade
+
+
 ENV PATH /opt/conda/bin:/opt/apps/go/bin:$PATH
 
 
