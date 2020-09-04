@@ -10,33 +10,48 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
-#RUN sudo apt install -y ansible
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+
+ARG TIMEZONE="America/Los_Angeles"
+RUN echo ${TIMEZONE} > /etc/timezone
+
+RUN sudo apt install -y ansible, rsync
 RUN sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
 
 # Create the environment:
 COPY env_ag.yml .
 RUN conda env update --name ag --file env_ag.yml
+# RUN conda env create --file env_ag.yml
+
+COPY env_python2.7.yml .
+# RUN conda env update --name python2.7 --file env_python2.7.yml
+RUN conda env create --file env_python2.7.yml
 
 COPY env_ml.yml .
-# RUN conda env update --name ag --file env_ag.yml
-RUN conda env create --file env_ml.yml
+RUN conda env update --name ml --file env_ml.yml
+# RUN conda env create --file env_ml.yml
 
-# RUN sudo apt -y upgrade
+RUN sudo apt -y upgrade
 
 RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps/bin && sudo chmod g+w /opt/apps/bin
 ENV PATH /opt/apps/bin:$PATH
 
 # install Kafka tools from the installed archive
-RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
-    sudo wget -q https://drive.google.com/u/0/open?id=1QU5MtVeH4e-_XZzs86tqHSs13bSmm4vy -O kafkatool.tgz && \
-    sudo tar xvfz kafkatool.tgz && \
-    sudo rm kafkatool.tgz
-COPY /opt/apps/kafkatool2/.install4j/install4j_qqmdbk-kafkatool.desktop /usr/share/applications/
+#RUN sudo mkdir -p /opt/apps && cd /opt/apps \
+# && curl -fSL "https://www.dropbox.com/s/7g7o7wco148ausk/kafkatool2-opt-apps-installed.tgz?dl=0" -o /tmp/kafkatool.tgz \
+# && sudo tar zxvf /tmp/kafkatool.tgz \
+# && sudo rm /tmp/kafkatool.tgz \
+# && cp /opt/apps/kafkatool2/.install4j/install4j_x8ox99-kafkatool.desktop /usr/share/applications/kafkatool.desktop
+
+# RUN cp /bin/bash /bin/sh
+
 
 # install nomachone nxserver accessible by $USER
 COPY nomachine/nxserver.sh /
 RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
 
+ENV SHELL /bin/bash
 ENTRYPOINT ["/nxserver.sh"]
 
 #USER $UID
