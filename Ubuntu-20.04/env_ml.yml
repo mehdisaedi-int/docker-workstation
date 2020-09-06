@@ -4,6 +4,7 @@ channels:
   - defaults
 dependencies:
   - python=3.8
+  - ffmpeg
   - pip
   - pip:
     - numpy
@@ -11,3 +12,6 @@ dependencies:
     - scikit-learn
     - matplotlib
     - torch
+    - torchvision
+    - ffmpeg-python
+    - peppercorn

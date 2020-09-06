@@ -16,21 +16,26 @@ ENV LANG C.UTF-8
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
-RUN sudo apt install -y ansible, rsync
+RUN sudo apt install -y rsync rubygems && sudo gem install gemfury
+RUN sudo apt install -y ffmpeg python3-tk
+RUN sudo apt install -y ansible redis
 RUN sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
+RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit
+# nvidia-driver-440
+
 
 # Create the environment:
 COPY env_ag.yml .
 RUN conda env update --name ag --file env_ag.yml
-# RUN conda env create --file env_ag.yml
+#RUN conda env create --file env_ag.yml
 
 COPY env_python2.7.yml .
-# RUN conda env update --name python2.7 --file env_python2.7.yml
-RUN conda env create --file env_python2.7.yml
+RUN conda env update --name python2.7 --file env_python2.7.yml
+#RUN conda env create --file env_python2.7.yml
 
 COPY env_ml.yml .
 RUN conda env update --name ml --file env_ml.yml
-# RUN conda env create --file env_ml.yml
+#RUN conda env create --file env_ml.yml
 
 RUN sudo apt -y upgrade
 
@@ -38,20 +43,21 @@ RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps/bin && sudo chmod 
 ENV PATH /opt/apps/bin:$PATH
 
 # install Kafka tools from the installed archive
-#RUN sudo mkdir -p /opt/apps && cd /opt/apps \
-# && curl -fSL "https://www.dropbox.com/s/7g7o7wco148ausk/kafkatool2-opt-apps-installed.tgz?dl=0" -o /tmp/kafkatool.tgz \
-# && sudo tar zxvf /tmp/kafkatool.tgz \
-# && sudo rm /tmp/kafkatool.tgz \
+RUN sudo mkdir -p /opt/apps && cd /opt/apps \
+&& curl -fSL "https://www.dropbox.com/s/7g7o7wco148ausk/kafkatool2-opt-apps-installed.tgz?dl=0" -o /tmp/kafkatool.tgz \
+&& sudo tar zxvf /tmp/kafkatool.tgz \
+&& sudo rm /tmp/kafkatool.tgz
 # && cp /opt/apps/kafkatool2/.install4j/install4j_x8ox99-kafkatool.desktop /usr/share/applications/kafkatool.desktop
 
-# RUN cp /bin/bash /bin/sh
+RUN cp /bin/bash /bin/sh
+RUN source ~/.bashrc
 
 
 # install nomachone nxserver accessible by $USER
 COPY nomachine/nxserver.sh /
 RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
 
-ENV SHELL /bin/bash
+# ENV SHELL=/bin/bash
 ENTRYPOINT ["/nxserver.sh"]
 
 #USER $UID
