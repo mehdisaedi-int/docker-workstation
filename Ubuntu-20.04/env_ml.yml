@@ -7,6 +7,7 @@ dependencies:
   - ffmpeg
   - pip
   - pip:
+    - setuptools
     - numpy
     - pandas
     - scikit-learn
@@ -15,3 +16,8 @@ dependencies:
     - torchvision
     - ffmpeg-python
     - peppercorn
+    - scikit-image
+    - tqdm
+    - oyaml
+    - tensorflow
+    - tensorflow-graphics-gpu

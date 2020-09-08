@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:personal
+FROM hossein20s/docker-workstation:dev
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:personal .
@@ -17,7 +17,7 @@ ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
 RUN sudo apt install -y rsync rubygems && sudo gem install gemfury
-RUN sudo apt install -y ffmpeg python3-tk
+RUN sudo apt install -y ffmpeg python3-tk python3-opencv
 RUN sudo apt install -y ansible redis
 RUN sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
 RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit
@@ -26,16 +26,16 @@ RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-
 
 # Create the environment:
 COPY env_ag.yml .
-RUN conda env update --name ag --file env_ag.yml
-#RUN conda env create --file env_ag.yml
+#RUN conda env update --name ag --file env_ag.yml
+RUN conda env create --file env_ag.yml
 
 COPY env_python2.7.yml .
-RUN conda env update --name python2.7 --file env_python2.7.yml
-#RUN conda env create --file env_python2.7.yml
+#RUN conda env update --name python2.7 --file env_python2.7.yml
+RUN conda env create --file env_python2.7.yml
 
 COPY env_ml.yml .
-RUN conda env update --name ml --file env_ml.yml
-#RUN conda env create --file env_ml.yml
+#RUN conda env update --name ml --file env_ml.yml
+RUN conda env create --file env_ml.yml
 
 RUN sudo apt -y upgrade
 
