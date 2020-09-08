@@ -37,6 +37,8 @@ RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -
 && sudo chmod +x ./kubectl \
 && sudo mv ./kubectl /usr/local/bin/kubectl
 
+RUN apt install -y rsync rubygems iputils-ping
+
 RUN sudo wget https://golang.org/dl/go1.15.1.linux-amd64.tar.gz \
 && sudo tar -C /opt/apps -xzf go1.15.1.linux-amd64.tar.gz \
 && sudo rm go1.15.1.linux-amd64.tar.gz
