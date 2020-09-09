@@ -5,6 +5,7 @@ channels:
 dependencies:
   - python=3.8
   - ffmpeg
+  - pillow
   - pip
   - pip:
     - setuptools
@@ -21,3 +22,4 @@ dependencies:
     - oyaml
     - tensorflow
     - tensorflow-graphics-gpu
+    - jupyter

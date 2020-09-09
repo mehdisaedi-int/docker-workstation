@@ -40,7 +40,7 @@ RUN conda env create --file env_ml.yml
 RUN sudo apt -y upgrade
 
 RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps/bin && sudo chmod g+w /opt/apps/bin
-ENV PATH /opt/apps/bin:$PATH
+ENV PATH /opt/apps/bin:/opt/conda/envs/ml/bin:$PATH
 
 # install Kafka tools from the installed archive
 RUN sudo mkdir -p /opt/apps && cd /opt/apps \

@@ -25,7 +25,7 @@ services:
       # - /tmp/.X11-unix:/tmp/.X11-unix
       # - /tmp/.docker.xauth:/tmp/.docker.xauthx
       - dev:/opt/ml
-      - ag:/opt/devbash
+      - ag:/opt/dev
   mysql-workbench:
     image: linuxserver/mysql-workbench
     container_name: mysql-workbench
