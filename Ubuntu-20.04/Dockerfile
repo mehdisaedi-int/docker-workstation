@@ -25,7 +25,7 @@ RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-
 
 
 # Create the environment:
-COPY env_ag.yml .
+COPY ../../hello-autogrid/env_ag.yml .
 #RUN conda env update --name ag --file env_ag.yml
 RUN conda env create --file env_ag.yml
 

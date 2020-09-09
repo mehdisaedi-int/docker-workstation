@@ -22,4 +22,6 @@ dependencies:
     - oyaml
     - tensorflow
     - tensorflow-graphics-gpu
+    - tensorflow-probability
+    - imageio
     - jupyter
