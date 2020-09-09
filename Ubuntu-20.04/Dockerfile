@@ -24,15 +24,6 @@ RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-
 # nvidia-driver-440
 
 
-# Create the environment:
-COPY ../../hello-autogrid/env_ag.yml .
-#RUN conda env update --name ag --file env_ag.yml
-RUN conda env create --file env_ag.yml
-
-COPY env_python2.7.yml .
-#RUN conda env update --name python2.7 --file env_python2.7.yml
-RUN conda env create --file env_python2.7.yml
-
 COPY env_ml.yml .
 #RUN conda env update --name ml --file env_ml.yml
 RUN conda env create --file env_ml.yml
