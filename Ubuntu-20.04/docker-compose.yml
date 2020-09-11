@@ -12,4 +12,4 @@ services:
       - SYS_PTRACE
     volumes:
       - .:/opt/host
-      - /dev/shm:/dev/shm
+      # - /dev/shm:/dev/shm
