@@ -11,5 +11,5 @@ services:
     cap_add:
       - SYS_PTRACE
     volumes:
-      - ${HOME}:/opt/host
+      - ${PWD}:/opt/host
       - /dev/shm:/dev/shm
