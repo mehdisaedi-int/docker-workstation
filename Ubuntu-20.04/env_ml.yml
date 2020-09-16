@@ -6,6 +6,7 @@ dependencies:
   - python=3.8
   - ffmpeg
   - pillow
+  - wandb
   - pip
   - pip:
     - setuptools
@@ -15,6 +16,15 @@ dependencies:
     - matplotlib
     - torch
     - torchvision
+    - pytorch-lightning
+    - test-tube
+    - tensorboard
+    - tensorboardX
+    - terminado
+    - torchfile
+    - torchnet
+    - torchsummary
+    - wandb-ng
     - ffmpeg-python
     - peppercorn
     - scikit-image

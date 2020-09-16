@@ -43,6 +43,7 @@ RUN sudo mkdir -p /opt/apps && cd /opt/apps \
 RUN cp /bin/bash /bin/sh
 RUN source ~/.bashrc
 
+RUN sudo chown -R developer:users /opt/conda /opt/apps && sudo chmod -R g+w /opt/conda /opt/apps
 
 # install nomachone nxserver accessible by $USER
 COPY nomachine/nxserver.sh /
