@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:conda-pycharm
+FROM hossein20s/docker-workstation:dev
 MAINTAINER HosseinAkhlaghpour@gmail.com
 # TODO: You need to copy CACerts.pem to here before runing this
 
