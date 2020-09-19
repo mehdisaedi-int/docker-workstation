@@ -1,12 +1,12 @@
 version: '3'
 services:
-  workstation:
+  workstation2:
     image: hossein20s/docker-workstation:conda-pycharm
-    container_name: workstation
+    container_name: workstation2
 #     command: tail -f /dev/null
     privileged: true
     ports:
-      - 4321:4000
+      - 4333:4000
     environment:
       DISPLAY: $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       USER: developer
