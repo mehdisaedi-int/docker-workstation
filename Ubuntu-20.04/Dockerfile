@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:dev-nvidia-tookit
+FROM hossein20s/docker-workstation:dev-nvidia-toolkit
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:unity3D-libs .
@@ -56,7 +56,6 @@ RUN sudo apt install -y libstdc++6 \
     zlib1g
 
 RUN sudo apt install -y debconf \
-    npm \
     xdg-utils \
     lsb-release \
     libpq5 \
