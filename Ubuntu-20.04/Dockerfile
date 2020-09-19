@@ -1,7 +1,7 @@
 FROM hossein20s/docker-workstation:dev-go-ruby
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:dev-tools .
+# docker build -t hossein20s/docker-workstation:dev-kubectl .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -19,21 +19,6 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.
 RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" \
 && sudo chmod +x ./kubectl \
 && sudo mv ./kubectl /usr/local/bin/kubectl
-
-RUN wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz \
-&& sudo tar -xzf postman.tar.gz -C /opt/apps \
-&& rm postman.tar.gz \
-&& sudo ln -s /opt/apps/Postman/Postman /usr/bin/postman \
-&& npm install -g newman newman-reporter-html
-
-COPY postman.desktop /usr/share/applications/
-
-# install Kafka tools from the installed archive
-RUN sudo mkdir -p /opt/apps && cd /opt/apps \
-&& curl -fSL "https://www.dropbox.com/s/7g7o7wco148ausk/kafkatool2-opt-apps-installed.tgz?dl=0" -o /tmp/kafkatool.tgz \
-&& sudo tar zxvf /tmp/kafkatool.tgz \
-&& sudo rm /tmp/kafkatool.tgz
-# && cp /opt/apps/kafkatool2/.install4j/install4j_x8ox99-kafkatool.desktop /usr/share/applications/kafkatool.desktop
 
 ENTRYPOINT ["/nxserver.sh"]
 
