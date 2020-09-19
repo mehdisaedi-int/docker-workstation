@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:dev-graphlibs
+FROM hossein20s/docker-workstation:dev-nvidia-toolkit
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:dev-tools .
