@@ -1,8 +1,8 @@
 version: '3'
 services:
-  workstation:
+  unity:
     image: hossein20s/docker-workstation:unity3D
-    container_name: workstation
+    container_name: unity
 #     command: tail -f /dev/null
     privileged: true
     ports:
