@@ -29,6 +29,9 @@ RUN cd /tmp && \
 COPY pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
 COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
 
+RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps && sudo chmod g+w /opt/apps
+ENV PATH /opt/conda/bin:/opt/apps/go/bin:/opt/apps/bin:$PATH
+
 ENTRYPOINT ["/nxserver.sh"]
 
 # USER $UID
