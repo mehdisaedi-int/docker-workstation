@@ -16,8 +16,9 @@ ARG UID=1000
 # RUN echo mysql-apt-config mysql-apt-config/select-server select mysql-5.7 | debconf-set-selections
 #&& sudo apt update && sudo apt install -y mysql-workbench
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \
-&& sudo apt install -y nodejs && sudo apt install -y build-essential
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
+    sudo apt install -y nodejs && sudo apt install -y build-essential && \
+    sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
 
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
 && sudo apt install -y apt-transport-https ca-certificates gnupg \
@@ -38,7 +39,6 @@ RUN sudo wget https://golang.org/dl/go1.15.1.linux-amd64.tar.gz \
 RUN sudo apt install -y rsync rubygems && sudo gem install gemfury
 RUN sudo apt install -y ffmpeg python3-tk python3-opencv
 RUN sudo apt install -y ansible redis
-RUN sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
 RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit
 
 RUN sudo apt -y upgrade
@@ -57,11 +57,6 @@ RUN sudo mkdir -p /opt/apps && cd /opt/apps \
 && sudo tar zxvf /tmp/kafkatool.tgz \
 && sudo rm /tmp/kafkatool.tgz
 # && cp /opt/apps/kafkatool2/.install4j/install4j_x8ox99-kafkatool.desktop /usr/share/applications/kafkatool.desktop
-
-RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps/bin && sudo chmod g+w /opt/apps/bin
-ENV PATH /opt/apps/bin:$PATH
-
-ENV PATH /opt/conda/bin:/opt/apps/go/bin:$PATH
 
 
 ENTRYPOINT ["/nxserver.sh"]
