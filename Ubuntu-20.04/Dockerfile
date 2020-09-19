@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:dev
+FROM hossein20s/docker-workstation:unity3D-libs
 MAINTAINER HosseinAkhlaghpour@gmail.com
 # TODO: You need to copy CACerts.pem to here before runing this
 
