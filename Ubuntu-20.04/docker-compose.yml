@@ -1,12 +1,12 @@
 version: '3'
 services:
-  workstation:
-    image: hossein20s/docker-workstation:personal
-    container_name: workstation
+  workstation2:
+    image: hossein20s/docker-workstation:ml
+    container_name: workstation2
 #     command: tail -f /dev/null
     privileged: true
     ports:
-      - 4322:4000
+      - 4333:4000
     environment:
       DISPLAY: # : $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       XAUTHORITY: /tmp/.docker.xauth
