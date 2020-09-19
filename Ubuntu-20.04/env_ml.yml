@@ -35,3 +35,8 @@ dependencies:
     - tensorflow-probability
     - imageio
     - jupyter
+    - tsne
+    - ray
+    - ray[tune]
+    - ray[rlib]
+    -
