@@ -6,7 +6,7 @@ dependencies:
   - python=3.8
   - ffmpeg
   - pillow
-  - wandb
+  - wandb=0.9.7
   - pip
   - pip:
     - setuptools
@@ -35,8 +35,4 @@ dependencies:
     - tensorflow-probability
     - imageio
     - jupyter
-    - tsne
-    - ray
-    - ray[tune]
-    - ray[rlib]
-    -
+
