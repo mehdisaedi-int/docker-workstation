@@ -17,10 +17,14 @@ ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
 COPY env_ml.yml .
+
+# USER developer
+
 #RUN conda env update --name ml --file env_ml.yml
 RUN conda env create --file env_ml.yml
+RUN sudo chgrp -R users /opt/conda/envs && sudo chmod -R g+w /opt/conda/envs
 
-RUN sudo apt -y upgrade
+# RUN sudo apt -y upgrade
 
 RUN cp /bin/bash /bin/sh
 RUN source ~/.bashrc
