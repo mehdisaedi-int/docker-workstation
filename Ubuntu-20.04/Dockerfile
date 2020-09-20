@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:conda-pycharm
+FROM hossein20s/docker-workstation:dev-tools
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:conda-R .
+# docker build -t hossein20s/docker-workstation:R .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
