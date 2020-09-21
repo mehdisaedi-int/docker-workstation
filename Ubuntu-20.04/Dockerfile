@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:dev-tools
+FROM hossein20s/docker-workstation:R
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:personal .
+# docker build -t hossein20s/docker-workstation:ml .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive

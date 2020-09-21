@@ -15,6 +15,7 @@ dependencies:
     - scikit-learn
     - matplotlib
     - seaborn
+    - statsmodels
     - torch
     - torchvision
     - pytorch-lightning
@@ -36,4 +37,7 @@ dependencies:
     - tensorflow-probability
     - imageio
     - jupyter
+    - nltk
+    - spacy
+    - dask
 
