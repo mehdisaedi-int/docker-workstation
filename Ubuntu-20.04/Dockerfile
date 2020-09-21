@@ -18,7 +18,7 @@ RUN echo ${TIMEZONE} > /etc/timezone
 
 COPY env_ml.yml .
 
-# USER developer
+# RUN sudo apt install python3-notebook jupyter jupyter-core python-ipykernel
 
 #RUN conda env update --name ml --file env_ml.yml
 RUN conda env create --file env_ml.yml
