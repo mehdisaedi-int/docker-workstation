@@ -1,0 +1,51 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: artifacts
+spec:
+  storageClassName: "aws-efs"
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+---
+kind: List
+apiVersion: v1
+items:
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: notebook-service
+    spec:
+      selector:
+        app: notebook # This must match the app label applied in the Deployment created below
+      ports:
+        - port: 8888
+          targetPort: 8888
+  - kind: Deployment
+    apiVersion: apps/v1
+    metadata:
+      name: notebook-deployment
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: notebook
+      template:
+        metadata:
+          labels:
+            app: notebook
+        spec:
+          containers:
+          - name: notebook
+            image: us.gcr.io/autogrid-dev/hossein.akhlaghpour/notebook/notebook:1.0
+            ports:
+            - containerPort: 8888
+            volumeMounts:
+              - mountPath: /opt/artifacts
+                name: artifacts-volume
+          volumes:
+            - name: artifacts-volume
+              persistentVolumeClaim:
+                claimName: artifacts
