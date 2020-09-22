@@ -23,16 +23,16 @@ items:
       ports:
         - port: 8888
           targetPort: 8888
-      type: LoadBalancer
+#       type: LoadBalancer
   - kind: Deployment
     apiVersion: apps/v1
     metadata:
       name: notebook-deployment
     spec:
       replicas: 1
-      selector:
-        matchLabels:
-          app: notebook
+#      selector:
+#        matchLabels:
+#          app: notebook
       template:
         metadata:
           labels:
@@ -45,9 +45,11 @@ items:
             - containerPort: 8888
             resources:
               limits:
-                cpu: "1.5"
-              requests:
                 cpu: "500m"
+                memory: 2000Mi
+              requests:
+                cpu: "100m"
+                memory: 256Mi
             volumeMounts:
               - mountPath: /opt/artifacts
                 name: artifacts-volume
