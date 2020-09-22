@@ -1,11 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: note2
+  name: note3
 spec:
   containers:
-  - name: note2
-    image: nginx
+  - name: note3
+    image: us.gcr.io/autogrid-dev/hossein.akhlaghpour/notebook/notebook:1.0
+    command: [ "/bin/sh" ]
+    args: [ "-c", "while true; do echo hello; sleep 10;done" ]
     resources:
       limits:
         cpu: "1.5"
