@@ -19,6 +19,7 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.
 && sudo apt update -y && sudo apt install google-cloud-sdk -y \
 && sudo apt install google-cloud-sdk-app-engine-java -y \
 
+# https://storage.googleapis.com/kubernetes-release/release/v1.19.0/bin/linux/amd64/kubectl
 RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" \
 && sudo chmod +x ./kubectl \
 && sudo mv ./kubectl /usr/local/bin/kubectl
