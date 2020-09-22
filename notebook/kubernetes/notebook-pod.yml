@@ -23,6 +23,7 @@ items:
       ports:
         - port: 8888
           targetPort: 8888
+      type: LoadBalancer
   - kind: Deployment
     apiVersion: apps/v1
     metadata:
@@ -39,9 +40,14 @@ items:
         spec:
           containers:
           - name: notebook
-            image: us.gcr.io/autogrid-dev/hossein.akhlaghpour/notebook/notebook:1.0
+            image: hossein20s/docker-workstation:notebook-ml
             ports:
             - containerPort: 8888
+            resources:
+              limits:
+                cpu: "1.5"
+              requests:
+                cpu: "500m"
             volumeMounts:
               - mountPath: /opt/artifacts
                 name: artifacts-volume
@@ -49,3 +55,22 @@ items:
             - name: artifacts-volume
               persistentVolumeClaim:
                 claimName: artifacts
+  - apiVersion: extensions/v1beta1
+    kind: Ingress
+    metadata:
+      annotations:
+        kubernetes.io/ingress.class: internal
+      name: notebook-ingress
+    spec:
+      tls:
+      - hosts:
+        - $INGRESS_HOST
+        secretName: tls-secret
+      rules:
+      - host: $INGRESS_HOST
+        http:
+          paths:
+          - path: /notebook
+            backend:
+              serviceName: notebook-service
+              servicePort: 8888

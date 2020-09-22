@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: note3
+  name: notebook
 spec:
   containers:
   - name: note3
-    image: us.gcr.io/autogrid-dev/hossein.akhlaghpour/notebook/notebook:1.0
-    command: [ "/bin/sh" ]
-    args: [ "-c", "while true; do echo hello; sleep 10;done" ]
+    image: hossein20s/docker-workstation:notebook-ml
+    ports:
+    - containerPort: 8888
     resources:
       limits:
         cpu: "1.5"

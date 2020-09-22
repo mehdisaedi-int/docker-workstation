@@ -5,7 +5,7 @@ MAINTAINER HosseinAkhlaghpour@gmail.com
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
-EXPOSE 22 4000
+EXPOSE 22 8888
 ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
@@ -42,4 +42,12 @@ RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
 RUN cp /bin/bash /bin/sh
 RUN source ~/.bashrc
 
+# Add Tini
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "--"]
+
+# Run your program under Tini
 USER ${USER}
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
