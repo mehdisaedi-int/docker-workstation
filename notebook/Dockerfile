@@ -45,7 +45,7 @@ RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
 RUN cp /bin/bash /bin/sh
 RUN source ~/.bashrc
 
-COPY start-notebook.sh /start-notebook.sh
+COPY start-notebook.sh .
 
 # Add Tini
 ENV TINI_VERSION v0.19.0

@@ -43,11 +43,12 @@ spec:
     spec:
       containers:
       - name: notebook
-        image: hossein20s/docker-workstation:notebook # jupyter/minimal-notebook:latest #
+        image: hossein20s/docker-workstation:notebook-01 # jupyter/minimal-notebook:latest #
         ports:
         - containerPort: 8888
-#            command: ["start-notebook.sh"]
-#            args: ["--NotebookApp.token=''"]
+        command: ["/bin/sh"]
+        args: ["-c", "jupyter notebook --notebook-dir=/opt/dev --ip=0.0.0.0 --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.base_url='/notebook/'"]
+        # args: ["-c", "jupyter notebook --notebook-dir=/opt/dev --ip=0.0.0.0 --no-browser --port=8888"]
         resources:
           limits:
             cpu: "500m"
@@ -88,7 +89,7 @@ spec:
   - host: $INGRESS_HOST
     http:
       paths:
-      - path: /tree
+      - path: /notebook
 #            pathType: "Prefix"
         backend:
           serviceName: jupyter-notebook
