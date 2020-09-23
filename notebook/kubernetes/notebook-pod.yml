@@ -11,63 +11,62 @@ spec:
       storage: 1Mi
 ---
 # check out https://cwienczek.com/2018/05/jupyter-on-kubernetes-the-easy-way/
-kind: List
+kind: Service
 apiVersion: v1
-items:
-  - kind: Service
-    apiVersion: v1
+metadata:
+  name: jupyter-notebook
+spec:
+#  type: NodePort
+  selector:
+    app: jupyter-notebook
+  ports:
+    - protocol: TCP
+      port: 8888
+#      nodePort: 30040
+      targetPort: 8888
+---
+kind: Deployment
+apiVersion: apps/v1 # extensions/v1beta1
+metadata:
+  name: jupyter-notebook
+#  labels:
+#    app: jupyter-notebook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyter-notebook
+  template:
     metadata:
-      name: jupyter-notebook
-    spec:
-      type: NodePort
-      selector:
-        app: jupyter-notebook
-      ports:
-        - protocol: TCP
-          port: 8888
-          nodePort: 30040
-          targetPort: 8888
-  - kind: Deployment
-    apiVersion: apps/v1
-    metadata:
-      name: jupyter-notebook
       labels:
         app: jupyter-notebook
     spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: jupyter-notebook
-      template:
-        metadata:
-          labels:
-            app: jupyter-notebook
-        spec:
-          containers:
-          - name: notebook
-            image: hossein20s/docker-workstation:notebook # jupyter/minimal-notebook:latest #
-            ports:
-            - containerPort: 8888
+      containers:
+      - name: notebook
+        image: hossein20s/docker-workstation:notebook # jupyter/minimal-notebook:latest #
+        ports:
+        - containerPort: 8888
 #            command: ["start-notebook.sh"]
 #            args: ["--NotebookApp.token=''"]
-            resources:
-              limits:
-                cpu: "500m"
-                memory: 2000Mi
-              requests:
-                cpu: "100m"
-                memory: 256Mi
-            volumeMounts:
-              - mountPath: /opt/dev
-                name: artifacts-volume
-          volumes:
-            - name: artifacts-volume
-              persistentVolumeClaim:
-                claimName: artifacts
-  - apiVersion: extensions/v1beta1 # "networking.k8s.io/v1beta1"
-    kind: Ingress
-    metadata:
-      namespace:
+        resources:
+          limits:
+            cpu: "500m"
+            memory: 2000Mi
+          requests:
+            cpu: "100m"
+            memory: 256Mi
+        volumeMounts:
+          - mountPath: /opt/dev
+            name: artifacts-volume
+      volumes:
+        - name: artifacts-volume
+          persistentVolumeClaim:
+            claimName: artifacts
+---
+apiVersion: extensions/v1beta1 # "networking.k8s.io/v1beta1"
+kind: Ingress
+metadata:
+  namespace:
 #      annotations:
 #        kubernetes.io/tls-acme: "true"
 #        kubernetes.io/ingress.class: "nginx"
@@ -76,21 +75,21 @@ items:
 #        nginx.ingress.kubernetes.io/auth-secret: basic-auth
 #        # message to display with an appropiate context why the authentication is required
 #        nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - jupyter"
-      annotations:
-        ingress.kubernetes.io/rewrite-target: /
-        kubernetes.io/ingress.class: internal
-      name: jupyter-notebook
-    spec:
-      tls:
-      - hosts:
-        - $INGRESS_HOST
-        secretName: jupyter-notebook-tls
-      rules:
-      - host: $INGRESS_HOST
-        http:
-          paths:
-          - path: /tree
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: internal
+  name: jupyter-notebook
+spec:
+  tls:
+  - hosts:
+    - $INGRESS_HOST
+    secretName: jupyter-notebook-tls
+  rules:
+  - host: $INGRESS_HOST
+    http:
+      paths:
+      - path: /tree
 #            pathType: "Prefix"
-            backend:
-              serviceName: jupyter-notebook
-              servicePort: 8888
+        backend:
+          serviceName: jupyter-notebook
+          servicePort: 8888
