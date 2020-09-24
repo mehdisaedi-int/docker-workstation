@@ -22,7 +22,9 @@ COPY postman.desktop /usr/share/applications/
 RUN sudo mkdir -p /opt/apps && cd /opt/apps \
 && curl -fSL "https://www.dropbox.com/s/7g7o7wco148ausk/kafkatool2-opt-apps-installed.tgz?dl=0" -o /tmp/kafkatool.tgz \
 && sudo tar zxvf /tmp/kafkatool.tgz \
-&& sudo rm /tmp/kafkatool.tgz
+&& sudo rm /tmp/kafkatool.tgz \
+&& sudo chgrp -R users /opt/apps/kafkatool2 && sudo chmod -R a+g /opt/apps/kafkatool2 \
+&& sudo ln -s /opt/apps/kafkatool2/kafkatool /usr/local/bin/kafkatool
 # && cp /opt/apps/kafkatool2/.install4j/install4j_x8ox99-kafkatool.desktop /usr/share/applications/kafkatool.desktop
 
 ENTRYPOINT ["/nxserver.sh"]
