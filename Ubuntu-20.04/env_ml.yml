@@ -26,6 +26,7 @@ dependencies:
     - torchfile
     - torchnet
     - torchsummary
+    - visdom
     - wandb-ng
     - ffmpeg-python
     - peppercorn
