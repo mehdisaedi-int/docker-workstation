@@ -21,7 +21,9 @@ ADD write_license_file.sh /
 ADD xvfb_build.sh /
 ADD xvfb_runtests.sh /
 
-RUN sudo chgrp -R users /opt/Unity && sudo chmod -R g+w /opt/Unity
+# This will add all files again to docker image and ignore all previous images
+# RUN sudo chgrp -R users /opt/Unity && sudo chmod -R g+w /opt/Unity
+
 
 ENTRYPOINT ["/nxserver.sh"]
 

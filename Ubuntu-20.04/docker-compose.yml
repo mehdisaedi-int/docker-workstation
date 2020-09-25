@@ -1,14 +1,14 @@
 version: '3'
 services:
-  workstation:
+  unity:
     image: hossein20s/docker-workstation:Unity3D
-    container_name: workstation
+    container_name: unity
 #     command: tail -f /dev/null
     privileged: true
     ports:
-      - 4321:4000
+      - 4000:4000
     environment:
-      DISPLAY: # : $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
+      DISPLAY: docker.for.mac.host.internal:0 # : $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       XAUTHORITY: /tmp/.docker.xauth
       USER: developer
       PASSWORD: developer
