@@ -1,12 +1,13 @@
 version: '3'
 services:
-  tmp:
-    image: hossein20s/docker-workstation:unity3D-libs
-    container_name: tmp
+  unity:
+    image: hossein20s/docker-workstation:Unity3D-libs
+    container_name: unity
 #     command: tail -f /dev/null
     privileged: true
+    network_mode: "bridge"
     ports:
-      - 4321:4000
+      - 4000:4000
     environment:
       DISPLAY: # : $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       XAUTHORITY: /tmp/.docker.xauth
@@ -17,7 +18,8 @@ services:
     volumes:
       - ${HOME}:/opt/host
       - /dev/shm:/dev/shm
-      # - ${HOME}/docker-workstation/developer:/home/developer # uncomment to persists user home
+      - ${HOME}/developer:/home/developer # uncomment to persists user home
+      # - ${HOME}/Dropbox/sync/Unity:/home/developer/Unity # uncomment to persists user home
       # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
       # you need to : touch /tmp/.docker.xauth
       # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
