@@ -5,13 +5,15 @@ MAINTAINER HosseinAkhlaghpour@gmail.com
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
-EXPOSE 22 4000-
+EXPOSE 22 4000 10000-50000
 ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
 RUN sudo apt update; \
     sudo apt install -y \
+    netcat \
+    nmap \
     ffmpeg \
     gconf-service \
     lib32gcc1 \
