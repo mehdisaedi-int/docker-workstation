@@ -18,15 +18,20 @@ EXPOSE 22 4000
 ENV DISPLAY :0
 
 RUN apt update -y && apt-get install -y aptitude && aptitude dist-upgrade --purge-unused -y && aptitude clean
-RUN apt install -y sudo \
- software-properties-common build-essential python3-pip libssl-dev libffi-dev\
- python3-dev python3-setuptools nano htop vim xterm ssh openssh-server curl wget git openjdk-8-jdk default-jdk
+RUN apt -y upgrade
+RUN apt install -y software-properties-common
+RUN apt install -y python3-pip
+RUN apt install -y build-essential libssl-dev libffi-dev python-dev python3-dev python3-setuptools
+RUN apt install -y ssh openssh-server
+RUN apt install -y libmysqlclient-dev default-libmysqlclient-dev
 
 RUN add-apt-repository universe
 RUN apt update -y && apt install -y dnsutils iputils-ping netcat nmap dnsutils locales locales-all pulseaudio cups
 
+RUN apt install -y openjdk-14-jdk default-jdk
+RUN apt install -y sudo nano htop vim xterm curl wget git \
+&& rm -rf /var/lib/apt/lists/*
 # localozation
-RUN apt install -y
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
@@ -53,9 +58,9 @@ RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
 # http://download.nomachine.com/download/6.11.2_1/Linux/nomachine_6.11.2_1_amd64.deb doesn't exist
 # so I download it from https://www.nomachine.com/download/download&id=2 and store it in goolge drive
 # RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_VERSION}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
-RUN curl -fSL "https://drive.google.com/uc?export=download&id=1SxqpwHXjiWl8h_a-jDUcD8J1WozbkOKB" -o /tmp/nomachine.deb \
+RUN curl -fSL "https://www.dropbox.com/s/2litfp1k5o1izja/nomachine_6.11.2_1_amd64.deb?dl=0" -o nomachine.deb \
 && echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - \
-&& dpkg -i /tmp/nomachine.deb && rm /tmp/nomachine.deb
+&& dpkg -i nomachine.deb && rm nomachine.deb
 RUN groupadd -r nomachine -g 433 && adduser ${USER} nomachine
 
 ENTRYPOINT ["/bin/sh", "-c", "$0 \"$@\"", "tail -f /dev/null"]
