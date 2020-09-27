@@ -17,7 +17,7 @@ ARG UID=1000
 #&& sudo apt update && sudo apt install -y mysql-workbench
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
-    sudo apt install -y nodejs && sudo apt install -y build-essential && \
+    sudo apt update && \
     sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
 
 
