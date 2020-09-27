@@ -18,7 +18,7 @@ ARG UID=1000
 
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
     sudo apt update && \
-    sudo apt install -y python-dev python3-dev libmysqlclient-dev default-libmysqlclient-dev
+    sudo apt install -y nodejs
 
 
 ENTRYPOINT ["/nxserver.sh"]
