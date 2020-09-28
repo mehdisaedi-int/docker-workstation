@@ -1,7 +1,7 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:ml
+    image: hossein20s/docker-workstation:ml-pytorch-tf
     container_name: workstation
 #     command: tail -f /dev/null
     privileged: true
