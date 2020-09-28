@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:dev-tools
+FROM hossein20s/docker-workstation:dev
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:R .
