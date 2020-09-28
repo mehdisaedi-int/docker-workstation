@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Name=Postman
-Icon=/opt/app/resources/app/node_modules/localforage/bower_components/modernizr/media/Modernizr 2 Logo.svg
+Icon=/opt/apps/Postman/app/resources/app/assets/icon.png
 Exec="/opt/apps/Postman/app/Postman" %f
 Comment=Postman
 Categories=Development;IDE;

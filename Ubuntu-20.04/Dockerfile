@@ -20,6 +20,13 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
     sudo apt update && \
     sudo apt install -y nodejs
 
+RUN wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz \
+&& sudo tar -xzf postman.tar.gz -C /opt/apps \
+&& rm postman.tar.gz \
+&& sudo ln -s /opt/apps/Postman/Postman /usr/bin/postman \
+&& npm install -g newman newman-reporter-html express eslint express-generator
+
+COPY postman.desktop /usr/share/applications/
 
 ENTRYPOINT ["/nxserver.sh"]
 
