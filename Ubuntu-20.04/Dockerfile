@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:R
+FROM hossein20s/docker-workstation:ml
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:ml .
+# docker build -t hossein20s/docker-workstation:ml-pytorch .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,22 +18,9 @@ RUN echo ${TIMEZONE} > /etc/timezone
 
 COPY env_ml.yml .
 
-# RUN sudo apt install python3-notebook jupyter jupyter-core python-ipykernel
+RUN conda env update --name ml --file env_ml.yml
+RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
 
-#RUN conda env update --name ml --file env_ml.yml
-RUN conda env create --file env_ml.yml
-RUN sudo chgrp -R users /opt/conda/envs && sudo chmod -R g+w /opt/conda/envs
-
-# RUN sudo apt -y upgrade
-
-RUN cp /bin/bash /bin/sh
-RUN source ~/.bashrc
-
-# install nomachone nxserver accessible by $USER
-COPY nomachine/nxserver.sh /
-RUN chown developer:users /nxserver.sh && chmod 755 /nxserver.sh
-
-# ENV SHELL=/bin/bash
 ENTRYPOINT ["/nxserver.sh"]
 
 #USER $UID

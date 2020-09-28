@@ -4,6 +4,8 @@ channels:
   - defaults
 dependencies:
   - python=3.8
+  - ffmpeg
+  - pillow
   - wandb=0.9.7
   - pip
   - pip:
@@ -12,3 +14,19 @@ dependencies:
     - pandas
     - scikit-learn
     - matplotlib
+    - seaborn
+    - statsmodels
+    - torch
+    - torchvision
+    - pytorch-lightning
+    - test-tube
+    - tensorboard
+    - tensorboardX
+    - terminado
+    - torchfile
+    - torchnet
+    - torchsummary
+    - visdom
+
+
+
