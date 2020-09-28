@@ -9,6 +9,7 @@ services:
       - 4321:4000
     environment:
       DISPLAY: $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
+      XAUTHORITY: /tmp/.docker.xauth
       USER: developer
       PASSWORD: developer
     cap_add:
@@ -16,7 +17,10 @@ services:
     volumes:
       - ${HOME}:/opt/host
       - /dev/shm:/dev/shm
-      # - ${HOME}/developer3:/home/developer
-      # - ./nomachine/etc/users.db:/usr/NX/etc/users.db
-      # - ./nomachine/etc/server.cfg:/usr/NX/etc/server.cfg
-      # - ${HOME}/desktop2-etc:/usr/NX/etc
+      # - ${HOME}/docker-workstation/Ubuntu-20.4/nomachine/etc/server.cfg:/usr/NX/etc/server.cfg
+      - ${HOME}/developer:/home/developer # uncomment to persists user home
+      # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
+      # you need to : touch /tmp/.docker.xauth
+      # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
+      # - /tmp/.X11-unix:/tmp/.X11-unix
+      # - /tmp/.docker.xauth:/tmp/.docker.xauthx
