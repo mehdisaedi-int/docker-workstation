@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Kafka Tool 2.0
+Exec="/opt/apps/kafkatool2/kafkatool" %U
+Icon=/opt/apps/kafkatool2/.install4j/kafkatool.png
+Categories=Application;
+StartupWMClass=install4j-com-kafkatool-ui-MainApp
+Categories=Development;IDE;
