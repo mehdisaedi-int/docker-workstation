@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:ml
+FROM hossein20s/docker-workstation:ml-pytorch
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:ml-pytorch .
+# docker build -t hossein20s/docker-workstation:ml-pytorch-tf .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive

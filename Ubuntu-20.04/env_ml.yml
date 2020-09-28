@@ -27,6 +27,18 @@ dependencies:
     - torchnet
     - torchsummary
     - visdom
-
-
+    - wandb-ng
+    - ffmpeg-python
+    - peppercorn
+    - scikit-image
+    - tqdm
+    - oyaml
+    - tensorflow
+    - tensorflow-graphics-gpu
+    - tensorflow-probability
+    - imageio
+    - jupyter
+    - nltk
+    - spacy
+    - dask
 
