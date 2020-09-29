@@ -1,0 +1,12 @@
+name: python3.6
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6.8
+  - pip
+  - pip:
+##    # works for regular pip packages
+    - jupyter
+    - ipykernel
+    - mysqlclient

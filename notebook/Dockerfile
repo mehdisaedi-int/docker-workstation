@@ -1,7 +1,7 @@
 FROM conda/miniconda2
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:notebook-ml .
+# docker build -t hossein20s/jpython-notebook-pod .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -25,16 +25,28 @@ RUN echo ${TIMEZONE} > /etc/timezone
 RUN apt update -y && apt install sudo jupyter-notebook jupyter-core python-ipykernel -y
 
 RUN apt install -y software-properties-common procps build-essential libssl-dev libffi-dev \
-    nginx nano htop vim curl wget git dnsutils iputils-ping
+    nginx nano htop vim curl wget git dnsutils iputils-ping default-libmysqlclient-dev
 
 RUN conda update -n base -c defaults conda && ln -sf /usr/local /opt/conda && \
  sudo chown -R root:users /opt/conda/envs && sudo chmod -R g+w /opt/conda/envs
 
-#RUN conda env update --name ml --file env_ml.yml
-COPY env_ml.yml .
+COPY env_python3.8.yml .
+RUN conda env create --file env_python3.8.yml
+COPY env_python3.6.yml .
+RUN conda env create --file env_python3.6.yml
+COPY env_python2.7.yml .
+RUN conda init bash && conda env create --file env_python2.7.yml
 
-#RUN conda env update --name ml --file env_ml.yml
-RUN conda env create --file env_ml.yml
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "python3.8", "/bin/bash", "-c"]
+RUN python -m ipykernel install --user --name=python3.8
+
+SHELL ["conda", "run", "-n", "python3.6", "/bin/bash", "-c"]
+RUN python -m ipykernel install --user --name=python3.6
+
+SHELL ["conda", "run", "-n", "python2.7", "/bin/bash", "-c"]
+RUN python -m ipykernel install --user --name=python2.7
+
 RUN chgrp -R users /opt/conda/envs && chmod -R g+w /opt/conda/envs
 
 # Option1: Using unencrypted password/ specifying password

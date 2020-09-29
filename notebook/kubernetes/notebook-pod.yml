@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: artifacts
+  name: notebook
 spec:
   storageClassName: "aws-efs"
   accessModes:
@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: notebook
-        image: hossein20s/docker-workstation:notebook-01 # jupyter/minimal-notebook:latest #
+        image: hossein20s/jpython-notebook-pod # jupyter/minimal-notebook:latest #
         ports:
         - containerPort: 8888
         command: ["/bin/sh"]
@@ -58,11 +58,11 @@ spec:
             memory: 256Mi
         volumeMounts:
           - mountPath: /opt/dev
-            name: artifacts-volume
+            name: notebook-volume
       volumes:
-        - name: artifacts-volume
+        - name: notebook-volume
           persistentVolumeClaim:
-            claimName: artifacts
+            claimName: notebook
 ---
 apiVersion: extensions/v1beta1 # "networking.k8s.io/v1beta1"
 kind: Ingress

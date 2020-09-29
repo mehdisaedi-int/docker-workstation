@@ -1,0 +1,12 @@
+name: python2.7
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=2.7
+  - pip
+  - pip:
+##    # works for regular pip packages
+    - jupyter
+    - ipykernel
+    - mysqlclient

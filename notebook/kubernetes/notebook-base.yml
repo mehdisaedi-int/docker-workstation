@@ -4,8 +4,8 @@ metadata:
   name: notebook
 spec:
   containers:
-  - name: note3
-    image: hossein20s/docker-workstation:notebook-ml
+  - name: notebook
+    image: hossein20s/jpython-notebook-pod
     ports:
     - containerPort: 8888
     resources:

@@ -19,6 +19,6 @@ if [ $UID == 0 ] ; then
     # Start the notebook server
     exec su $NB_USER -c "env PATH=$PATH jupyter notebook $*"
 else
-    # Otherwise just exec the notebook... add --port=8888 --NotebookApp.base_url=/notebook and optionally --NotebookApp.token=
-    exec jupyter notebook --notebook-dir=/home/jovyan --ip=0.0.0.0 --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.base_url=$JPY_PREFIX
+    # Otherwise just exec the notebook...
+    exec jupyter notebook --notebook-dir=/opt/dev --ip=0.0.0.0 --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.base_url='/notebook/'
 fi
