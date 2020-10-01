@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:dev-tk-opencv
+FROM hossein20s/docker-workstation:dev
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:dev-tk-opencv .
+# docker build -t hossein20s/docker-workstation:nvidia .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -10,7 +10,8 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
-RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit
+RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit \
+ && python3-tk python3-opencv
 
 
 ENTRYPOINT ["/nxserver.sh"]
