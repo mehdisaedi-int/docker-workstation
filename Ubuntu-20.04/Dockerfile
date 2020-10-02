@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:conda-pycharm
+FROM hossein20s/docker-workstation:nvidia
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:Unity3D-libs .
