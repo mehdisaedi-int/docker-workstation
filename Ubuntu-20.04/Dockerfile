@@ -10,8 +10,10 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
-RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit \
- && python3-tk python3-opencv
+RUN sudo apt update && sudo apt install -y ffmpeg python3-tk python3-opencv
+RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit
+
+
 
 
 ENTRYPOINT ["/nxserver.sh"]
