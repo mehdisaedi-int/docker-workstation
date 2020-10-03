@@ -1,0 +1,31 @@
+name: python3.8
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+##    # works for regular pip packages
+    - jupyter
+    - ipykernel
+    - mysqlclient
+    - tini
+    - firebase
+    - firebase-admin
+    - dask
+    - distributed
+    - ipython
+    - newrelic
+    - snakeviz
+    - Django
+    - djangorestframework-jwt
+    - djangorestframework
+    - django-bootstrap3
+    - django-crispy-forms
+    - django-extensions
+    - django-filter
+    - django-mysql
+    - django-tables2
+    - dogpile.cache
+

@@ -29,8 +29,8 @@ RUN wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz \
 COPY postman.desktop /usr/share/applications/
 
 SHELL ["/bin/sh", "-c"]
-COPY python3.8.yml .
-RUN conda env update --name autogrid --file python3.8.yml
+COPY env_python3.8.yml .
+RUN conda env update --name python3.8 --file python3.8.yml
 
 ENTRYPOINT ["/nxserver.sh"]
 
