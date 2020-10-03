@@ -10,6 +10,7 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
+USER root
 #RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb \
 #&& sudo apt install -y ./mysql-apt-config_0.8.15-1_all.deb \
 #&& sudo rm ./mysql-apt-config_0.8.15-1_all.deb \ # it hangs may be the fix is
@@ -20,7 +21,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
     sudo apt update && \
     sudo apt install -y nodejs
 
-RUN npm install -g newman newman-reporter-html express eslint express-generator
+RUN sudo npm install -g newman newman-reporter-html express eslint express-generator
 RUN sudo snap install postman
 
 #RUN wget https://dl.pstmn.io/download/latest/linux64 -O /tmp/postman.tar.gz \
