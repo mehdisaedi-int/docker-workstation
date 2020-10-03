@@ -20,6 +20,9 @@ COPY env_ml.yml .
 RUN conda create --name ml --clone python3.8 && conda env update --name ml --file env_ml.yml
 
 RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
+USER ${USER}
+SHELL ["conda", "run", "-n", "ml", "python", "-m", "ipykernel", "install", "--user", "--name=ml"]
+SHELL ["/bin/sh", "-c"]
 
 ENTRYPOINT ["/nxserver.sh"]
 
