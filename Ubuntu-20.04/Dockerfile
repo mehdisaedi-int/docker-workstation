@@ -13,7 +13,7 @@ ARG UID=1000
 # installing Ruby Gemfry Redis
 RUN sudo apt update && sudo apt install -y rsync rubygems && sudo gem install gemfury
 RUN sudo apt update && sudo apt install -y ansible redis
-RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw
+#RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw
 
 # installing go-lang
 RUN sudo wget https://golang.org/dl/go1.15.1.linux-amd64.tar.gz \
