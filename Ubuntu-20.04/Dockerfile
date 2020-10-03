@@ -34,16 +34,16 @@ RUN sudo wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh -s 
     sudo mv ~/.TinyTeX /opt/TinyTeX && \
     sudo /opt/TinyTeX/bin/*/tlmgr path add
 
-# Install pandoc
-RUN sudo mkdir -p /opt/pandoc && \
-    sudo wget -O /opt/pandoc/pandoc.gz https://files.r-hub.io/pandoc/linux-64/pandoc.gz && \
-    sudo gzip -d /opt/pandoc/pandoc.gz && \
-    sudo chmod +x /opt/pandoc/pandoc && \
-    sudo ln -s /opt/pandoc/pandoc /usr/bin/pandoc && \
-    sudo wget -O /opt/pandoc/pandoc-citeproc.gz https://files.r-hub.io/pandoc/linux-64/pandoc-citeproc.gz && \
-    sudo gzip -d /opt/pandoc/pandoc-citeproc.gz && \
-    sudo chmod +x /opt/pandoc/pandoc-citeproc && \
-    sudo ln -s /opt/pandoc/pandoc-citeproc /usr/bin/pandoc-citeproc
+## Install pandoc
+#RUN sudo mkdir -p /opt/pandoc && \
+#    sudo wget -O /opt/pandoc/pandoc.gz https://files.r-hub.io/pandoc/linux-64/pandoc.gz && \
+#    sudo gzip -d /opt/pandoc/pandoc.gz && \
+#    sudo chmod +x /opt/pandoc/pandoc && \
+#    sudo ln -s /opt/pandoc/pandoc /usr/bin/pandoc && \
+#    sudo wget -O /opt/pandoc/pandoc-citeproc.gz https://files.r-hub.io/pandoc/linux-64/pandoc-citeproc.gz && \
+#    sudo gzip -d /opt/pandoc/pandoc-citeproc.gz && \
+#    sudo chmod +x /opt/pandoc/pandoc-citeproc && \
+#    sudo ln -s /opt/pandoc/pandoc-citeproc /usr/bin/pandoc-citeproc
 
 
 # Install R
