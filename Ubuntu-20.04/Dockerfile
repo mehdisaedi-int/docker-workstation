@@ -20,13 +20,16 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
     sudo apt update && \
     sudo apt install -y nodejs
 
-RUN wget https://dl.pstmn.io/download/latest/linux64 -O /tmp/postman.tar.gz \
-&& sudo tar -xzf /tmp/postman.tar.gz -C /opt/apps \
-&& rm /tmp/postman.tar.gz \
-&& sudo ln -s /opt/apps/Postman/Postman /usr/bin/postman \
-&& npm install -g newman newman-reporter-html express eslint express-generator
+RUN npm install -g newman newman-reporter-html express eslint express-generator
+RUN sudo snap install postman
 
-COPY postman.desktop /usr/share/applications/
+#RUN wget https://dl.pstmn.io/download/latest/linux64 -O /tmp/postman.tar.gz \
+#&& sudo tar -xzf /tmp/postman.tar.gz -C /opt/apps \
+#&& rm /tmp/postman.tar.gz \
+#&& sudo ln -s /opt/apps/Postman/Postman /usr/bin/postman \
+#
+#
+#COPY postman.desktop /usr/share/applications/
 
 SHELL ["/bin/sh", "-c"]
 COPY env_python3.8.yml .
