@@ -51,6 +51,8 @@ RUN sudo mkdir -p /opt/apps && cd /opt/apps \
 
 COPY icons/kafkatool.desktop /usr/share/applications/
 
+RUN sudo rm -rf /var/lib/apt/lists/*
+
 ENTRYPOINT ["/nxserver.sh"]
 
 # USER $UID
