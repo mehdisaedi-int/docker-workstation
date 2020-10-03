@@ -7,9 +7,9 @@ services:
     privileged: true
     # network_mode: "host"
     ports:
-      - 4000:4000
+      - 4321:4000
     environment:
-      DISPLAY: docker.for.mac.host.internal:0 # : $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
+      DISPLAY: $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       XAUTHORITY: /tmp/.docker.xauth
       USER: developer
       PASSWORD: developer
@@ -24,6 +24,7 @@ services:
       # you need to : touch /tmp/.docker.xauth
       # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - /tmp/.docker.xauth:/tmp/.docker.xauthx
+      - /tmp/.docker.xauth:/tmp/.docker.xauth
+
 
 
