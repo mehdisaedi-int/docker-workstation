@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:conda-pycharm
+FROM hossein20s/docker-workstation:notebook
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:dev-nodejs .
@@ -27,6 +27,10 @@ RUN wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz \
 && npm install -g newman newman-reporter-html express eslint express-generator
 
 COPY postman.desktop /usr/share/applications/
+
+SHELL ["/bin/sh", "-c"]
+COPY python3.8.yml .
+RUN conda env update --name autogrid --file python3.8.yml
 
 ENTRYPOINT ["/nxserver.sh"]
 
