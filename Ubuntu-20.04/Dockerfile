@@ -11,8 +11,8 @@ ARG USER=developer
 ARG UID=1000
 
 # installing Ruby Gemfry Redis
-RUN sudo apt install -y rsync rubygems && sudo gem install gemfury
-RUN sudo apt install -y ansible redis
+RUN sudo apt update && sudo apt install -y rsync rubygems && sudo gem install gemfury
+RUN sudo apt update && sudo apt install -y ansible redis
 RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw
 
 # installing go-lang
