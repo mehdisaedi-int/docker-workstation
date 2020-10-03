@@ -17,7 +17,7 @@ ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
 COPY env_ml.yml .
-RUN conda create --name ml --clone python3.8 && conda env update --name ml --file env_autogrid.yml
+RUN conda create --name ml --clone python3.8 && conda env update --name ml --file env_ml.yml
 
 RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
 
