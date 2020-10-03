@@ -32,6 +32,8 @@ SHELL ["/bin/sh", "-c"]
 COPY env_python3.8.yml .
 RUN conda env update --name python3.8 --file python3.8.yml
 
+RUN sudo rm -rf /var/lib/apt/lists/*
+
 ENTRYPOINT ["/nxserver.sh"]
 
 # USER $UID
