@@ -13,6 +13,8 @@ ARG UID=1000
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
+user root
+
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
