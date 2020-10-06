@@ -16,7 +16,7 @@ ARG UID=1000
 # openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out CACerts.pem
 
 # ADD CACerts.pem $HOME/.local/share/unity3d/Certificates/
-RUN query=`curl -c ./cookie.txt -s -L "https://drive.google.com/uc?export=download&id=1TZOpCYtIrJfWrwLMLgougfOK671GI2jF" | pup 'a#uc-download-link attr{href}' | sed -e 's/amp;//g'` \
+RUN query="curl -c ./cookie.txt -s -L 'https://drive.google.com/uc?export=download&id=1TZOpCYtIrJfWrwLMLgougfOK671GI2jF' | pup 'a#uc-download-link attr{href}' | sed -e 's/amp;//g'" \
  && curl -b ./cookie.txt -L -o /tmp/part.tgz "https://drive.google.com${query}" \
  && sudo tar zxf /tmp/part.tgz -C /opt
 
