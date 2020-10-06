@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:unity3D-5-3
+FROM hossein20s/docker-workstation:unity3D-libs
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:Unity3D .
@@ -10,22 +10,28 @@ ENV DISPLAY :0
 ARG USER=developer
 ARG UID=1000
 
-RUN sudo mkdir -p $HOME/.local/share/unity3d/Certificates/
+# RUN sudo mkdir -p $HOME/.local/share/unity3d/Certificates/
 
 # I use this to create CACerts.pem
 # openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out CACerts.pem
 
-ADD CACerts.pem $HOME/.local/share/unity3d/Certificates/
-ADD combined_entry.sh /
-ADD write_license_file.sh /
-ADD xvfb_build.sh /
-ADD xvfb_runtests.sh /
+# ADD CACerts.pem $HOME/.local/share/unity3d/Certificates/
+
+RUN curl -fSL "https://drive.google.com/uc?export=download&id=1TZOpCYtIrJfWrwLMLgougfOK671GI2jF" -o /tmp/part.tgz && \
+  sudo tar zxf /tmp/part.tgz -C /opt/
+
+RUN curl -fSL "https://drive.google.com/uc?export=download&id=1r7n3qtkVZaoJptc-Y9mumdNyPMsVunxX" -o /tmp/part.tgz && \
+  sudo tar zxf /tmp/part.tgz -C /opt/Unity/Hub
+
+RUN rm /tmp/*tgz
 
 # This will add all files again to docker image and ignore all previous images
-# RUN sudo chgrp -R users /opt/Unity && sudo chmod -R g+w /opt/Unity
+RUN sudo chgrp -R users /opt/Unity && sudo chmod -R g+w /opt/Unity
 
 
 ENTRYPOINT ["/nxserver.sh"]
 
 # USER $UID
 # WORKDIR /home/${USER}
+#
+#
