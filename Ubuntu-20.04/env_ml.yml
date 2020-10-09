@@ -4,6 +4,8 @@ channels:
   - defaults
 dependencies:
   - python=3.8
+  - cudatoolkit=10.1
+  - mpi4py=3.0 # installs cuda-aware openmpi
   - ffmpeg
   - pillow
   - wandb=0.9.7
@@ -27,6 +29,7 @@ dependencies:
     - torchnet
     - torchsummary
     - visdom
+    - pycocotools
     - detecrton2
 
 
