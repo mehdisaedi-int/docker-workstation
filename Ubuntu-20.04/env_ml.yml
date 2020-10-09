@@ -5,6 +5,7 @@ channels:
 dependencies:
   - python=3.8
   - cudatoolkit=10.1
+  - detectronw2
 #  - mpi4py=3.0 # installs cuda-aware openmpi
 #  - pycocotools
   - ffmpeg
@@ -30,8 +31,6 @@ dependencies:
     - torchnet
     - torchsummary
     - visdom
-    - git+https://github.com/facebookresearch/detectron2.git[complete]
-
 
 
 
