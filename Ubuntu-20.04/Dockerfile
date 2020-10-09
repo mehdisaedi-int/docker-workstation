@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:detectron2
+FROM hossein20s/docker-workstation:ml-pytorch
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:detectron2 .
