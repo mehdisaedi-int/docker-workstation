@@ -27,6 +27,7 @@ dependencies:
     - torchnet
     - torchsummary
     - visdom
+    - detecrton2
 
 
 
