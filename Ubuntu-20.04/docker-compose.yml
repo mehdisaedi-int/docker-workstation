@@ -71,8 +71,8 @@ services:
     volumes:
       - "mongodb_data:/data/db"
     command: "mongod --smallfiles --logpath=/dev/null"
-    networks:
-      - cocoannotator
+#    networks:
+#      - cocoannotator
 volumes:
   ag:
     external: true
