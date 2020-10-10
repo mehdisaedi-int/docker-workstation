@@ -1,6 +1,6 @@
 # PyCharm
 .idea/
-
+**/cookie
 /Ubuntu-20.04/developer/.cache/
 /Ubuntu-20.04/developer/.config/
 /Ubuntu-20.04/developer/.dbus/
