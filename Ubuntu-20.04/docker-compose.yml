@@ -15,10 +15,10 @@ services:
     cap_add:
       - SYS_PTRACE
     volumes:
-      - ${HOME}:/opt/host
+      - ~:/opt/host
       - /dev/shm:/dev/shm
       # - ${HOME}/docker-workstation/Ubuntu-20.4/nomachine/etc/server.cfg:/usr/NX/etc/server.cfg
-      - ${HOME}/developer:/home/developer # uncomment to persists user home
+      - ./developer:/home/developer # uncomment to persists user home
       # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
       # you need to : touch /tmp/.docker.xauth
       # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
