@@ -78,5 +78,7 @@ volumes:
     external: true
   dev:
     external: true
+  mongodb_data:
+    external: true
 
 
