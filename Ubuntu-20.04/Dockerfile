@@ -19,7 +19,7 @@ ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
 RUN cd /root &&  sudo wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf - \
-   && cp /root/.dropbox-dist/dropboxd /usr/local/bin
+   && cp /root/.dropbox-dist/dropboxd /usr/local/bin/
 
 ENTRYPOINT ["/nxserver.sh"]
 
