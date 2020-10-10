@@ -4,9 +4,8 @@ channels:
   - defaults
 dependencies:
   - python=3.8
-  - cudatoolkit=10.1
-#  - detectronw2
-  - mpi4py=3.0 # installs cuda-aware openmpi
+#  - cudatoolkit=10.1
+#  - mpi4py=3.0 # installs cuda-aware openmpi
 #  - pycocotools
   - ffmpeg
   - pillow
