@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:ml-pytorch
+FROM hossein20s/docker-workstation:pytorch-nvidia
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:detectron2 .
@@ -18,12 +18,11 @@ user root
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
-RUN sudo apt update && sudo apt install -y ffmpeg python3-tk python3-opencv
-RUN sudo apt update && sudo apt install -y hardinfo hwinfo lshw mesa-utils grub-efi-amd64-bin nvidia-cuda-toolkit
 
 COPY env_ml.yml .
 
-RUN conda env update --name ml --file env_ml.yml
+RUN sudo chgrp -R users /opt/conda/pkgs/cache && sudo chmod -R g+w /opt/conda/pkgs/cache
+RUN conda env update --prefix ./env --file env_ml.yml --prune
 RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
 
 
