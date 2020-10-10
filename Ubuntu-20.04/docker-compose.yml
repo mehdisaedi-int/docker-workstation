@@ -36,8 +36,8 @@ services:
       - SECRET_KEY=RandomSecretKeyHere
       - FILE_WATCHER=true
     volumes:
-      - "./datasets:/datasets"
-      - "./models:/models"
+      - "~/dropbox/datasets:/datasets"
+      - "~/dropbox/models:/models"
     depends_on:
       - database
       - workers
@@ -47,7 +47,7 @@ services:
     container_name: annotator_workers
     image: jsbroks/coco-annotator:workers-stable
     volumes:
-      - "./datasets:/datasets"
+      - "~/dropbox/datasets:/datasets"
     depends_on:
       - messageq
       - database
