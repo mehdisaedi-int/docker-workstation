@@ -1,7 +1,7 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:detectron2
+    image: hossein20s/docker-workstation:personal
     container_name: workstation
 #     command: tail -f /dev/null
     privileged: true
@@ -18,7 +18,7 @@ services:
       - ~:/opt/host
       - /dev/shm:/dev/shm
       # - ${HOME}/docker-workstation/Ubuntu-20.4/nomachine/etc/server.cfg:/usr/NX/etc/server.cfg
-      - ~/dropbox:/home/developer # uncomment to persists user home
+      - ~/developer:/home/developer # uncomment to persists user home
       # the following is for X11 DISPLAY from http://wiki.ros.org/docker/Tutorials/GUI
       # you need to : touch /tmp/.docker.xauth
       # xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f /tmp/.docker.xauth nmerge -
@@ -79,6 +79,8 @@ volumes:
   dev:
     external: true
   mongodb_data:
+    external: true
+  developer:
     external: true
 
 
