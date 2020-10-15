@@ -32,6 +32,7 @@ dependencies:
     - visdom
     - --find-links https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.6/index.html
     - detectron2
+    - pytorch3d
 
 
 
