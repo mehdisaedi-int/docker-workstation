@@ -9,6 +9,7 @@ dependencies:
   - pycocotools
   - ffmpeg
   - pillow
+  - pygpu
   - wandb=0.9.7
   - pip
   - pip:
@@ -33,6 +34,10 @@ dependencies:
     - --find-links https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.6/index.html
     - detectron2
     - pytorch3d
+    - Theano>=0.8
+    - EasyDict
+    - Pillow
+    - pyyaml
 
 
 

@@ -22,7 +22,9 @@ RUN echo ${TIMEZONE} > /etc/timezone
 RUN sudo apt update -y && sudo apt install fuse sshfs rclone -y \
   && mknod -m 666 /dev/fuse c 10 229 \
   && sudo echo 'user_allow_other' | sudo tee -a /etc/fuse.conf 
-  
+
+RUN sudo apt update -y && sudo apt install meshlab -y
+
 COPY env_ml.yml .
 
 RUN conda env update --name ml --file /env_ml.yml --prune
