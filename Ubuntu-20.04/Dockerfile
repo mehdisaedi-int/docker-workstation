@@ -34,7 +34,3 @@ RUN conda env update --name mobile --file env_mobile.yml
 RUN sudo chgrp -R users /opt/conda/envs/mobile && sudo chmod -R g+w /opt/conda/envs/mobile
 
 ENTRYPOINT ["/nxserver.sh"]
-USER ${USER}
-
-#USER $UID
-#WORKDIR /home/${USER}
