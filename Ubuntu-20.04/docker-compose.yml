@@ -1,12 +1,13 @@
 version: '3'
 services:
   workstation:
-    image: hossein20s/docker-workstation:personal
+    image: hossein20s/docker-workstation:mobile
     container_name: workstation
 #     command: tail -f /dev/null
     privileged: true
+    # network_mode: "host"
     ports:
-      - 4321:4000
+      - 4444:4000
     environment:
       DISPLAY: # : $DISPLAY # for mac DISPLAY=docker.for.mac.host.internal:0 # --before running docker-compose and after running xhost +
       XAUTHORITY: /tmp/.docker.xauth
@@ -25,62 +26,8 @@ services:
       # - /tmp/.X11-unix:/tmp/.X11-unix
       # - /tmp/.docker.xauth:/tmp/.docker.xauthx
       - dev:/opt/ml
-      - ag:/opt/dev
-  webserver:
-    image: jsbroks/coco-annotator:webserver-stable
-    container_name: annotator_webclient
-    restart: always
-    ports:
-      - "5000:5000"
-    environment:
-      - SECRET_KEY=RandomSecretKeyHere
-      - FILE_WATCHER=true
-    volumes:
-      - "~/dropbox/datasets:/datasets"
-      - "~/dropbox/models:/models"
-    depends_on:
-      - database
-      - workers
-#    networks:
-#      - cocoannotator
-  workers:
-    container_name: annotator_workers
-    image: jsbroks/coco-annotator:workers-stable
-    volumes:
-      - "~/dropbox/datasets:/datasets"
-    depends_on:
-      - messageq
-      - database
-#    networks:
-#      - cocoannotator
-  messageq:
-    image: rabbitmq:3
-    container_name: annotator_message_q
-    environment:
-      - RABBITMQ_DEFAULT_USER=user
-      - RABBITMQ_DEFAULT_PASS=password
-#    networks:
-#      - cocoannotator
-  database:
-    image: mongo:4.0
-    container_name: annotator_mongodb
-    restart: always
-    environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
-    volumes:
-      - "mongodb_data:/data/db"
-    command: "mongod --smallfiles --logpath=/dev/null"
-#    networks:
-#      - cocoannotator
 volumes:
-  ag:
-    external: true
   dev:
-    external: true
-  mongodb_data:
     external: true
   developer:
     external: true
-
-

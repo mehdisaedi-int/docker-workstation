@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:mobile
+FROM hossein20s/docker-workstation:detectron2
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:personal .
+# docker build -t hossein20s/docker-workstation:mobile .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,15 +18,23 @@ user root
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
-RUN sudo apt update -y && sudo apt install fuse sshfs rclone -y \
-  && mknod -m 666 /dev/fuse c 10 229 \
-  && sudo echo 'user_allow_other' | sudo tee -a /etc/fuse.conf 
-  
+# install PyCharm professional
+# RUN cd /tmp && \
+#    sudo wget -q http://download.jetbrains.com/python/pycharm-professional-2020.2.3.tar.gz -O pycharm.tar.gz && \
+#    sudo mkdir -p /opt/apps && cd /opt/apps && sudo tar xvfz /tmp/pycharm.tar.gz && sudo rm /tmp/pycharm.tar.gz
 
-#RUN sudo wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf - \
-#   && cp .dropbox-dist/dropboxd /usr/local/bin/
+#COPY jetbrains-pycharm.desktop /usr/share/applications/
+
+#RUN sudo chgrp users opt/apps/pycharm-2020.2.3 && sudo chmod g+w opt/apps/pycharm-2020.2.3
+
+
+COPY env_mobile.yml .
+RUN conda env update --name mobile --file env_mobile.yml
+
+RUN sudo chgrp -R users /opt/conda/envs/mobile && sudo chmod -R g+w /opt/conda/envs/mobile
 
 ENTRYPOINT ["/nxserver.sh"]
+USER ${USER}
 
 #USER $UID
 #WORKDIR /home/${USER}
