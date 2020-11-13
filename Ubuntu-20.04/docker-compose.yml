@@ -1,7 +1,7 @@
 version: '3'
 services:
   ml:
-    image: hossein20s/docker-workstation:robo-gym
+    image: hossein20s/docker-workstation:pytorch3D
     container_name: ml
 #     command: tail -f /dev/null
     privileged: true
