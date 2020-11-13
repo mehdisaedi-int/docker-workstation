@@ -5,15 +5,11 @@ channels:
 dependencies:
   - python=3.8
   - cudatoolkit=10.1
-  - mpi4py=3.0 # installs cuda-aware openmpi
-  - pycocotools
   - ffmpeg
   - pillow
   - pygpu
-  - wandb=0.9.7
   - pip
   - pip:
-    - setuptools
     - numpy
     - pandas
     - scikit-learn
@@ -21,24 +17,10 @@ dependencies:
     - matplotlib
     - seaborn
     - statsmodels
-    - torch
-    - torchvision
-    - pytorch-lightning
-    - test-tube
-    - tensorboard
-    - tensorboardX
-    - terminado
-    - torchfile
-    - torchnet
-    - torchsummary
-    - visdom
-    - --find-links https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.6/index.html
-    - detectron2
-    - pytorch3d
-    - Theano>=0.8
-    - EasyDict
-    - Pillow
-    - pyyaml
+    - pyqt5
+    - pyserial
+    - robo-gym-server-modules
+    - robo-gym
 
 
 
