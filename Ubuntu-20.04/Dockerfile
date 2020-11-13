@@ -1,4 +1,4 @@
-FROM hossein20s/docker-workstation:robo-gy-conda
+FROM hossein20s/docker-workstation:robo-gym-conda
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
 # docker build -t hossein20s/docker-workstation:robo-gym-pycharm .
