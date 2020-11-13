@@ -57,15 +57,6 @@ RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | chpasswd \
 && adduser ${USER} users && adduser ${USER} sudo \
 && usermod --shell /bin/bash ${USER}
 
-# Option2: Using the same encrypted password as host
-#COPY /etc/group /etc/group
-#COPY /etc/passwd /etc/passwd
-#COPY /etc/shadow /etc/shadow
-
-# Nomachine even though there is no desktop installed
-# http://download.nomachine.com/download/6.11.2_1/Linux/nomachine_6.11.2_1_amd64.deb doesn't exist
-# so I download it from https://www.nomachine.com/download/download&id=2 and store it in goolge drive
-# RUN curl -fSL "http://download.nomachine.com/download/${NOMACHINE_VERSION}/Linux/${NOMACHINE_PACKAGE_NAME}" -o nomachine.deb \
 RUN curl -fSL "https://www.dropbox.com/s/2litfp1k5o1izja/nomachine_6.11.2_1_amd64.deb?dl=0" -o nomachine.deb \
 && echo "${NOMACHINE_MD5} nomachine.deb" | md5sum -c - \
 && dpkg -i nomachine.deb && rm nomachine.deb
@@ -75,12 +66,10 @@ RUN groupadd -r nomachine -g 433 && adduser ${USER} nomachine
 RUN apt update &&  apt install -y dialog apt-utils
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt install -y lubuntu-desktop lubuntu-restricted-addons lubuntu-restricted-extras lxqt
-# RUN apt install -y mate-desktop-environment-core
 
 ARG NX_NODE_CFG=/usr/NX/etc/node.cfg
 ARG NX_SRV_CFG=/usr/NX/etc/server.cfg
 RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxqt"' $NX_NODE_CFG
-# RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxde"' $NX_NODE_CFG
 RUN sudo sed -i '/DefaultDesktopCommand/c\DefaultDesktopCommand "/usr/bin/startlxqt"' $NX_SRV_CFG
 
 ADD nomachine/nxserver.sh /
@@ -90,41 +79,5 @@ ENV PATH /opt/conda/bin:$PATH
 
 RUN sudo apt-get update --fix-missing && sudo apt-get install -y wget bzip2 ca-certificates \
     libglib2.0-0 libxext6 libsm6 libxrender1 git
-
-#RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-#    sudo /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-#    rm ~/miniconda.sh && \
-#    sudo ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-#    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-#    echo "conda activate base" >> ~/.bashrc
-#
-#RUN sudo chown -R root:users /opt/conda && sudo chmod -R g+w /opt/conda
-## RUN conda install anaconda
-#RUN conda install netcdf4
-#
-#ENV TINI_VERSION v0.19.0
-#ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-#RUN sudo chmod +x /tini
-#
-#
-#RUN sudo apt-get update && sudo apt-get install -y mysql-client
-## RUN sudo apt install -y build-essential python-dev libmysqlclient-dev libmysqlcppconn-dev
-#RUN sudo apt install -y pkg-config && sudo apt install -y libfreetype6-dev && sudo apt-get clean
-
-## install PyCharm community
-#RUN cd /tmp && \
-#    sudo wget -q http://download.jetbrains.com/python/pycharm-community-2020.2.3.tar.gz -O pycharm.tar.gz && \
-#    sudo mkdir -p /opt/apps && cd /opt/apps && sudo tar xvfz /tmp/pycharm.tar.gz && sudo rm /tmp/pycharm.tar.gz
-#
-## install PyCharm professional
-#RUN cd /tmp && \
-#    sudo wget -q http://download.jetbrains.com/python/pycharm-professional-2020.2.3.tar.gz -O pycharm.tar.gz && \
-#    sudo mkdir -p /opt/apps && cd /opt/apps && sudo tar xvfz /tmp/pycharm.tar.gz && sudo rm /tmp/pycharm.tar.gz
-#
-#COPY pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
-#COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
-
-#RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps && sudo chmod g+w /opt/apps
-#ENV PATH /opt/conda/bin:/opt/apps/go/bin:/opt/apps/bin:$PATH
 
 ENTRYPOINT ["/nxserver.sh"]
