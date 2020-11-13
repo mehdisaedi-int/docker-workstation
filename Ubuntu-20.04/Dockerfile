@@ -1,38 +1,38 @@
-FROM hossein20s/docker-workstation:robo-gy
+FROM hossein20s/docker-workstation:robo-gy-conda
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:robo-gym-conda .
+# docker build -t hossein20s/docker-workstation:robo-gym-pycharm .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
 EXPOSE 22 4000
 ENV DISPLAY :0
+ARG USER=developer
 ARG UID=1000
-
-# localozation
-ARG TIMEZONE="America/Los_Angeles"
-RUN echo ${TIMEZONE} > /etc/timezone
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN sudo apt-get update --fix-missing && sudo apt-get install -y wget bzip2 ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1 git
+RUN sudo apt-get update && sudo apt-get install -y openjdk-11-jdk default-jdk mysql-client
+# RUN sudo apt install -y build-essential python-dev libmysqlclient-dev libmysqlcppconn-dev
+RUN sudo apt install -y pkg-config && sudo apt install -y libfreetype6-dev
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    sudo /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh && \
-    sudo ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
+# install PyCharm community
+RUN cd /tmp && \
+    sudo wget -q http://download.jetbrains.com/python/pycharm-community-2020.2.3.tar.gz -O pycharm.tar.gz && \
+    sudo mkdir -p /opt/apps && cd /opt/apps && sudo tar xvfz /tmp/pycharm.tar.gz && sudo rm /tmp/pycharm.tar.gz
 
-RUN sudo chown -R root:users /opt/conda && sudo chmod -R g+w /opt/conda
-# RUN conda install anaconda
-RUN conda install netcdf4
+# install PyCharm professional
+RUN cd /tmp && \
+    sudo wget -q http://download.jetbrains.com/python/pycharm-professional-2020.2.3.tar.gz -O pycharm.tar.gz && \
+    sudo mkdir -p /opt/apps && cd /opt/apps && sudo tar xvfz /tmp/pycharm.tar.gz && sudo rm /tmp/pycharm.tar.gz
 
-ENV TINI_VERSION v0.19.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN sudo chmod +x /tini && \
-    sudo apt-get clean
+COPY pycharm/jetbrains-pycharm-community.desktop /usr/share/applications/
+COPY pycharm/jetbrains-pycharm.desktop /usr/share/applications/
+
+RUN sudo mkdir -p /opt/apps/bin && sudo chgrp users /opt/apps && sudo chmod g+w /opt/apps
+ENV PATH /opt/conda/bin:/opt/apps/go/bin:/opt/apps/bin:$PATH
 
 ENTRYPOINT ["/nxserver.sh"]
 
+# USER $UID
+# WORKDIR /home/${USER}
