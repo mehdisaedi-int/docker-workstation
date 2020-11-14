@@ -1,7 +1,7 @@
 version: '3'
 services:
   ml:
-    image: hossein20s/docker-workstation:robo-gym-ros2
+    image: hossein20s/docker-workstation:robo-gym-melodic
     container_name: ml
 #     command: tail -f /dev/null
     privileged: true

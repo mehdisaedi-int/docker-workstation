@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=UR10 Simulator
+Icon=/opt/robogym_ws/UR10.svg
+Exec="/opt/robogym_ws/UR10_simulator.sh" %f
+Comment=UR10 Simulator for Community Developers
+Categories=Development;IDE;
+Terminal=true
