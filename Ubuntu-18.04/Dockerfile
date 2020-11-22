@@ -24,7 +24,9 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
 RUN sudo apt-get update \
  && sudo apt-get install -qq -y swig python-rosdep python-catkin-tools
 
-RUN mkdir -p /opt/ros_catkin_ws
+RUN sudo chown -R 1000:1000 /opt/conda/pkgs/ && conda update -n base -c defaults conda
+
+
 COPY env_ml.yml .
 
 USER $UID
@@ -39,8 +41,7 @@ COPY install.sh /opt/robogym_ws/src/robo-gym-robot-servers/
 #
 RUN /opt/robogym_ws/src/robo-gym-robot-servers/install.sh
 
-RUN conda env update --name ml --file /env_ml.yml --prune
-# RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
+RUN conda env update --name rlros --file env_ml.yml --prune
 
 #RUN cd /opt/ros_catkin_ws \
 # && rosinstall_generator desktop --rosdistro melodic --deps --tar > melodic-desktop.rosinstall \
