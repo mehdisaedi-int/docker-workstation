@@ -86,5 +86,7 @@ export LC_MEASUREMENT="en_US.utf8"
 export LC_IDENTIFICATION="en_US.utf8"
 export LC_ALL="en_US.utf8"
 
+source /opt/ros/melodic/setup.bash
 source /opt/robogym_ws/devel/setup.bash
+source /robogym_ws/devel/setup.bash
 
