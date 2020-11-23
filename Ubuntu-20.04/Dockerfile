@@ -19,11 +19,9 @@ ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
 COPY env_ml.yml .
-RUN sudo chown -R 1000:1000 /opt/conda/ && conda update -n base -c defaults conda
+RUN conda update -n base -c defaults conda \
+  && conda env create --name ml --file env_ml.yml
 
-user $USER
-RUN conda env update --name ml --file env_ml.yml
-
-# RUN sudo chgrp -R users /opt/conda/envs/mobile && sudo chmod -R g+w /opt/conda/envs/mobile
+RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
 
 ENTRYPOINT ["/nxserver.sh"]
