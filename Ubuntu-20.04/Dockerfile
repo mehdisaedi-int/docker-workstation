@@ -19,6 +19,7 @@ ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
 COPY env_ml.yml .
+RUN sudo chown -R 1000:1000 /opt/conda/pkgs/ && conda update -n base -c defaults conda
 
 user $USER
 RUN conda env update --name ml --file env_ml.yml
