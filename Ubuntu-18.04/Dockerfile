@@ -1,7 +1,7 @@
 FROM hossein20s/docker-workstation:robo-gym-ros2
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:robo-gym-melodic .
+# docker build -t hossein20s/docker-workstation:robo-gym-rlros .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -24,10 +24,11 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
 RUN sudo apt-get update \
  && sudo apt-get install -qq -y swig python-rosdep python-catkin-tools
 
-RUN sudo chown -R 1000:1000 /opt/conda/ && conda update -n base -c defaults conda
+COPY env_rlros.yml .
+RUN conda update -n base -c defaults conda \
+  && conda env create --force --name rlros --file env_rlros.yml
 
-
-COPY env_ml.yml .
+RUN sudo chgrp -R users /opt/conda/envs/rlros && sudo chmod -R g+w /opt/conda/envs/rlros
 
 USER $UID
 # https://github.com/cyberbotics/webots/releases/download/R2020b-rev1/webots-R2020b-rev1-x86-64_ubuntu-16.04.tar.bz2
@@ -41,7 +42,6 @@ COPY install.sh /opt/robogym_ws/src/robo-gym-robot-servers/
 #
 RUN /opt/robogym_ws/src/robo-gym-robot-servers/install.sh
 
-RUN conda env update --name rlros --file env_ml.yml --prune
 
 #RUN cd /opt/ros_catkin_ws \
 # && rosinstall_generator desktop --rosdistro melodic --deps --tar > melodic-desktop.rosinstall \
