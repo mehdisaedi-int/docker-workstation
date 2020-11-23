@@ -24,7 +24,7 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
 RUN sudo apt-get update \
  && sudo apt-get install -qq -y swig python-rosdep python-catkin-tools
 
-RUN sudo chown -R 1000:1000 /opt/conda/pkgs/ && conda update -n base -c defaults conda
+RUN sudo chown -R 1000:1000 /opt/conda/ && conda update -n base -c defaults conda
 
 
 COPY env_ml.yml .

@@ -6,7 +6,7 @@ channels:
   - anaconda
   - defaults
 dependencies:
-  - python=3.8
+  - python=3.5
   - pip
   - pillow=5.0.0=py35h3deb7b8_0
   - pixman=0.34.0=hceecf20_3
