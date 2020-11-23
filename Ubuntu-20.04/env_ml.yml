@@ -13,6 +13,14 @@ dependencies:
   - pip
   - pip:
     - setuptools
+    - urllib3
+    - requests
+    - firebase
+    - firebase-admin
+    - oauth2client
+    - protobuf
+    - Pyrebase
+    - gcloud
     - numpy
     - pandas
     - scikit-learn
@@ -32,6 +40,3 @@ dependencies:
     - visdom
     - --find-links https://dl.fbaipublicfiles.com/detectron2/wheels/cu101/torch1.6/index.html
     - detectron2
-
-
-

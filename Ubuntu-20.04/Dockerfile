@@ -18,19 +18,11 @@ user root
 ARG TIMEZONE="America/Los_Angeles"
 RUN echo ${TIMEZONE} > /etc/timezone
 
-# install PyCharm professional
-# RUN cd /tmp && \
-#    sudo wget -q http://download.jetbrains.com/python/pycharm-professional-2020.2.3.tar.gz -O pycharm.tar.gz && \
-#    sudo mkdir -p /opt/apps && cd /opt/apps && sudo tar xvfz /tmp/pycharm.tar.gz && sudo rm /tmp/pycharm.tar.gz
+COPY env_ml.yml .
 
-#COPY jetbrains-pycharm.desktop /usr/share/applications/
+user $USER
+RUN conda env update --name ml --file env_ml.yml
 
-#RUN sudo chgrp users opt/apps/pycharm-2020.2.3 && sudo chmod g+w opt/apps/pycharm-2020.2.3
-
-
-COPY env_mobile.yml .
-RUN conda env update --name mobile --file env_mobile.yml
-
-RUN sudo chgrp -R users /opt/conda/envs/mobile && sudo chmod -R g+w /opt/conda/envs/mobile
+# RUN sudo chgrp -R users /opt/conda/envs/mobile && sudo chmod -R g+w /opt/conda/envs/mobile
 
 ENTRYPOINT ["/nxserver.sh"]
