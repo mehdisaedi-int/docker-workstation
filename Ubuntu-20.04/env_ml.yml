@@ -8,11 +8,11 @@ dependencies:
   - pip:
     - setuptools
     - urllib3
+    - Pyrebase
     - requests
+    - firebase-admin # firebase-admin should come after Pyrebase and requests otherwise Pyrebase installs the wrong version of requests 2.11.1
     - firebase
-    - firebase-admin
     - oauth2client
     - protobuf
-    - Pyrebase
     - gcloud
 
