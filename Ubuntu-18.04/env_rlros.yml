@@ -69,6 +69,7 @@ dependencies:
   - xz
   - zlib
   - pip:
+    - tensorflow
     - absl-py
     - atari-py
     - better-exceptions
@@ -89,7 +90,7 @@ dependencies:
     - pandas
     - progressbar2
     - pybullet
-    - pyglet
+    - pyglet==1.5.0
     - pyopengl
     - pyparsing
     - pytest
@@ -114,6 +115,7 @@ dependencies:
     - cma
     - h5py
     - Box2D
+    -
 
 
 

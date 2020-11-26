@@ -1,7 +1,7 @@
-FROM hossein20s/docker-workstation:robo-gym-ros2
+FROM hossein20s/docker-workstation:robo-gym-melodic
 MAINTAINER HosseinAkhlaghpour@gmail.com
 
-# docker build -t hossein20s/docker-workstation:robo-gym-rlros .
+# docker build -t hossein20s/docker-workstation:rlros-srl .
 # use developer as the main user to install-> use sudo for any RUN command
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -26,7 +26,8 @@ RUN sudo apt-get update \
 
 COPY env_rlros.yml .
 RUN conda update -n base -c defaults conda \
-  && conda env create --force --name rlros --file env_rlros.yml
+  && conda env create --force --name rlros --file env_rlros.yml \
+  && conda init bash
 
 RUN sudo chgrp -R users /opt/conda/envs/rlros && sudo chmod -R g+w /opt/conda/envs/rlros
 
