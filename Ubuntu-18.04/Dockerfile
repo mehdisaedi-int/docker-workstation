@@ -22,12 +22,8 @@ RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" 
   && wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
 
 RUN sudo apt-get update \
- && sudo apt-get install -qq -y swig python-rosdep python-catkin-tools
+ && sudo apt-get install -qq -y python-rosdep python-catkin-tools
 
-RUN sudo chown -R 1000:1000 /opt/conda/ && conda update -n base -c defaults conda
-
-
-COPY env_ml.yml .
 
 USER $UID
 # https://github.com/cyberbotics/webots/releases/download/R2020b-rev1/webots-R2020b-rev1-x86-64_ubuntu-16.04.tar.bz2
@@ -40,8 +36,6 @@ RUN mkdir -p /opt/robogym_ws/src && cd /opt/robogym_ws/src \
 COPY install.sh /opt/robogym_ws/src/robo-gym-robot-servers/
 #
 RUN /opt/robogym_ws/src/robo-gym-robot-servers/install.sh
-
-RUN conda env update --name rlros --file env_ml.yml --prune
 
 #RUN cd /opt/ros_catkin_ws \
 # && rosinstall_generator desktop --rosdistro melodic --deps --tar > melodic-desktop.rosinstall \
