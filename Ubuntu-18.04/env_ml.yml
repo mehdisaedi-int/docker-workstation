@@ -1,18 +1,22 @@
 name: ml
 channels:
   - conda-forge
+##  - pytorch
   - defaults
 dependencies:
   - python=3.8
+#  - numpy
+#  - pillow
   - pip
   - pip:
-    - setuptools
-    - urllib3
-    - Pyrebase
-    - requests
-    - firebase-admin # firebase-admin should come after Pyrebase and requests otherwise Pyrebase installs the wrong version of requests 2.11.1
-    - firebase
-    - oauth2client
-    - protobuf
-    - gcloud
+    - box2d-py==2.3.8
+    - pybullet
+    - gym-minigrid
+    - scikit-optimize
+    - optuna
+    - pytablewriter
+    - seaborn
+    - pyyaml>=5.1
+    - sb3-contrib>=0.10.0
+    - imitation
 
