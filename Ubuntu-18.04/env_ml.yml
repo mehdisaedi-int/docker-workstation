@@ -1,14 +1,21 @@
 name: ml
 channels:
   - conda-forge
-##  - pytorch
+  - pytorch
   - defaults
 dependencies:
   - python=3.8
-#  - numpy
-#  - pillow
+  - numpy
+  - pillow
   - pip
   - pip:
+    - gym
+    - matplotlib
+    - pandas
+    - seaborn
+    - scikit-learn
+    - scipy
+    - stable-baselines3
     - box2d-py==2.3.8
     - pybullet
     - gym-minigrid
