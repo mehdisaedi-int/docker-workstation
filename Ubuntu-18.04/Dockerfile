@@ -14,7 +14,6 @@ ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
 user root
-ENV PATH /opt/conda/bin:$PATH
 RUN apt update && apt install -y swig cmake ffmpeg
 RUN cd /opt \
    && git clone --recursive https://github.com/DLR-RM/rl-baselines3-zoo
@@ -27,6 +26,6 @@ RUN conda update -n base -c defaults conda \
   && conda env create --name ml --file env_ml.yml \
   && conda init bash
 
-RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
+# RUN sudo chgrp -R users /opt/conda/envs/ml && sudo chmod -R g+w /opt/conda/envs/ml
 
 ENTRYPOINT ["/nxserver.sh"]
