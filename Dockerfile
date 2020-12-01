@@ -2,7 +2,7 @@ FROM hossein20s/docker-workstation:nomachine
 #MAINTAINER mehdi.saedi.int@gmail.com
 
 ENV DEBIAN_FRONTEND=noninteractive
-EXPOSE 4440 4000
+EXPOSE 22 4000
 ENV DISPLAY :0
 
 #remove all JDK and OPENJDK First
@@ -46,9 +46,11 @@ RUN sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.
 RUN sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 RUN apt update && apt install code
 #install webstorm 
-# RUN apt install ubuntu-make
-# RUN umake ide webstorm
-# RUN chmod +x ~/.local/share/applications/jetbrains-webstorm.desktop
+RUN sudo mkdir -p /opt/apps && cd /opt/apps && \
+    sudo wget -q http://download-cf.jetbrains.com/webstorm/WebStorm-2020.3.tar.gz && \
+    sudo tar xvfz WebStorm-2020.3.tar.gz && \
+    sudo rm WebStorm-2020.3.tar.gz
+COPY webstorm/jetbrains-webstorm.desktop /usr/share/applications/
 #istall android studio
 #RUN sudo snap install android-studio --classic
 
@@ -59,3 +61,4 @@ ENV PATH "$PATH:/home/developer/flutter/bin"
 # Run basic check to download Dark SDK
 RUN flutter doctor
 
+ENTRYPOINT ["/nxserver.sh"]

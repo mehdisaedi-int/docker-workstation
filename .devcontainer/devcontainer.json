@@ -1,5 +1,5 @@
 {
-    "name": "workstation-docker:flutter",
+    "name": "workstation-docker-flutter",
     "context": "..",
     "dockerFile": "../Dockerfile",
     "remoteUser": "developer",

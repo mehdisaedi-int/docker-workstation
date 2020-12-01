@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WebStorm Professional Edition
+Icon=/opt/apps/WebStorm-2020.3/bin/webstorm.svg
+Exec="/opt/apps/WebStorm-2020.3/bin/webstorm.sh" %f
+Comment=JavaScript IDE for Professional Developers
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-webstorm
